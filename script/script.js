@@ -27,29 +27,7 @@ function enabledBtn() {
     }
 }
 
-// function getStoredCards () {
-// 	var getCards = getIdea();
-
-// }
-
-// function getStoredCards() {
-//     var retrievedCards = JSON.parse(localStorage.getItem("storedCards")) || [];
-//     retrievedCards.forEach(function (retrievedCard) {
-//         var ideaCard = new IdeaCard(retrievedCard.title, retrievedCard.idea, retrievedCard.id, retrievedCard.quality);
-//         $('section').append(populateCard(ideaCard)); 
-//     });
-// }`
-
-
-// get local storage
-//iterate over it
-// get cards
-// append cards
-
-
-
 $('#submit-button').on('click', addIdea);
-// $('.idea-article').on('click', deleteIdea);
 
 var keys = Object.keys(localStorage)
 
@@ -67,7 +45,6 @@ function Idea (title, body, status ) {
 }
 
 function addIdea (e) {
-	e.preventDefault();
 	var title = $('.main-title').val();
 	var body = $('.idea-input').val();
 	var status = 'swill';
@@ -95,11 +72,13 @@ function prependIdea (idea) {
 	$('.idea-input').val("");
 }
 
-$('.bookmark-list').on('click', '.delete-button-div', function() {
-	$(this).closest('.idea-article').remove();
-	localStorage.removeItem(($(this).closest('.idea-article').attr('id')));
-	// localStorage.removeItem('');
-});
+$('.bookmark-list').on('click', '.delete-button-div', removeThis);
+
+
+function removeThis(e){
+	$(e.target).parent().remove();
+	localStorage.removeItem($(e.target).parent().attr('id'));
+}
 
 
 function storeIdea (id, card) {
