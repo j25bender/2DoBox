@@ -2,85 +2,45 @@
 
 <html>
 	<head>
-		
 		<meta charset = "utf-8">
-
 		<title>ideabox project </title>
-
 		<link href = "style/reset.css" rel="stylesheet" type="text/css">
-
 		<link href ="style/style.css" rel="stylesheet" type ="text/css">
-
 		<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:700" rel="stylesheet">
-
 		<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-
 	</head>
 
 	<body>
 	<header>
-	
-	<h1><span class ="accent-color">idea</span>box </h1>
+		<h1><span class="accent-color">idea</span>box </h1>
+		<label for="title-input">
+			<input id ="title-input" class="main-title input" type="text" placeholder="Title">
+		</label> 
 
-	<label for="title-input">
-		<input id ="title-input" class="main-title input" type="text" placeholder ="Title">
-	</label> 
+		<label for="body-input">
+			<input id ="body-input" class="idea-input input" type="text" placeholder="Body">
+		</label>
 
-	<label for="body-input">
-		<input id ="body-input" class="idea-input input" type="text" placeholder ="Body">
-	</label>
-
-	<label for = "submit-button">
-		<input id="submit-button" class="button enterButton" type="button" value ="save" disabled>
-	</label>
-
-
+		<label for="submit-button">
+			<input id="submit-button" class="button enterButton" type="button" value="save" disabled>
+		</label>
 	</header>
 
 	<main class="container">
-
 		<label for="search-input">
-		<input id ="search-input" class="search-box input" type="text" placeholder ="Search">
+			<input id ="search-input" class="search-box input" type="text" placeholder ="Search">
 		</label>
-	<section class="bookmark-list">
-	<!-- <article class="idea-article">
+	
+		<section class="bookmark-list">
 		
-		<h2 class="idea-title"> Example idea 1</h2> 
-		
-
-			<img src ="images/delete.svg" class="icon-buttons delete-button right" />
-
-		
-		<p contenteditable="true" class="idea-paragraph">Lorum ipsum lorum ipsum lorum ipsum Lorum ipsum lorum ipsum lorum ipsum Lorum ipsum lorum ipsum lorum ipsum </p>
-		
-		
-		
-		<p class="quality-rank"> 
-			<img src ="images/upvote.svg" class ="icon-buttons upvote-button" />
-		<img src = "images/downvote.svg" class="icon-buttons downvote-button" />
-
-		quality: <span class = "quality-content"> swill</span> </p>
-
-		<hr /> 
-		
-
-	</article> -->
-	</section>
-
+		</section>
 	</main>
 
-	
-	
-	
-
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="script/jquery-3.2.1.min.js"><\/script>')</script>
-
-<script src="script/script.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="script/jquery-3.2.1.min.js"><\/script>')</script>
+	<script src="script/script.js"></script>
 
 	</body>
-
 <html>
 
