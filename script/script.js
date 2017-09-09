@@ -59,13 +59,13 @@ function prependIdea(idea) {
 	$('.bookmark-list').prepend(
 		`<article id=${idea.id} class="idea-article">
 		<h2 class="idea-title" contenteditable=true >${idea.title}</h2> 
-		<div class="delete-button-div icon-buttons delete-button right">
+		<div class="icon-buttons delete-button right">
 		</div>
 		<p contenteditable="true" class="idea-paragraph">${idea.body}</p>
 		<div class="quality-rank"> 
-		<div class="upvote-button-div icon-buttons upvote-button">
+		<div class="icon-buttons upvote-button">
 		</div>
-		<div class="downvote-button-div icon-buttons downvote-button"> 
+		<div class="icon-buttons downvote-button"> 
 		</div>
 		<p> quality: <span class = "quality-content">${idea.status}</span> </p> </div>
 		<hr /> 
@@ -74,7 +74,7 @@ function prependIdea(idea) {
 	$('.idea-input').val("");
 }
 
-$('.bookmark-list').on('click', '.delete-button-div', removeThis);
+$('.bookmark-list').on('click', '.delete-button', removeThis);
 
 function removeThis(e){
 	$(e.target).parent().remove();
@@ -94,27 +94,36 @@ function checkValue(e) {
 	}
 };
 
+$('.bookmark-list').on('click', '.upvote-button', upVoteTodo);
 
-$('.bookmark-list').on('click', '.upvote-button-div', upVoteTodo);
+function upVoteTodo(){
+	var qualityArr = ['swill', 'plausible', 'genius'];
+	var quality = $(this).parent().find('.quality-content').text();
+    quality > qualityArr[0] ? quality = qualityArr[1] : quality = qualityArr[2]
+    $(this).parent().find('.quality-content').text(quality);
+	console.log(quality)
+}
 
+// console.log(qualityArr[0])
+	// $('.quality-content').text(qualityArr[i])
 
-function upVoteTodo(e) {
-	var checkStatus = $(this).parent().find('.quality-content').text();
-	var id = ($(this).closest('.idea-article').attr('id'));
-	var uniqueCard = JSON.parse(localStorage.getItem(id));
+// function upVoteTodo(e) {
+// 	var checkStatus = $(this).parent().find('.quality-content').text();
+// 	var id = ($(this).closest('.idea-article').attr('id'));
+// 	var uniqueCard = JSON.parse(localStorage.getItem(id));
 
-	if (checkStatus === 'swill') {	
-    	$(this).parent().find('.quality-content').text('plausible');
-    	uniqueCard.status = 'plausible';
-		localStorage.setItem(id, JSON.stringify(uniqueCard));
-    } else {
-    	$(this).parent().find('.quality-content').text('genius');
-    	uniqueCard.status = 'genius';
-    	localStorage.setItem(id, JSON.stringify(uniqueCard));
-    }
-};
+// 	if (checkStatus === 'swill') {	
+//     	$(this).parent().find('.quality-content').text('plausible');
+//     	uniqueCard.status = 'plausible';
+// 		localStorage.setItem(id, JSON.stringify(uniqueCard));
+//     } else {
+//     	$(this).parent().find('.quality-content').text('genius');
+//     	uniqueCard.status = 'genius';
+//     	localStorage.setItem(id, JSON.stringify(uniqueCard));
+//     }
+// };
 
-$('.bookmark-list').on('click', '.downvote-button-div', downVoteTodo);
+$('.bookmark-list').on('click', '.downvote-button', downVoteTodo);
 
 function downVoteTodo() {
   	var checkStatus = $(this).parent().find('.quality-content').text();
