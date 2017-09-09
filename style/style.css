@@ -1,55 +1,50 @@
-
-*, *:before, *:after {
-  box-sizing: border-box;
+/*Base Styling for Entire Page*/
+*, *:before, *:after{
+	box-sizing: border-box;
 }
 
-body {
+body{
 	font-family: 'Open Sans', sans-serif;
 	font-size: 16px;
 }
 
-h1 {
+h1{
 	font-family: 'Roboto Slab', serif;
 	color: #6D6E71;
 	font-size: 22pt;
 	padding-top: 10px;
 }
 
-
-h1, h2, h3 {
-font-family: 'Roboto Slab', serif;	
+h1, h2, h3{
+	font-family: 'Roboto Slab', serif;
 }
 
-
-
-/*header styles*/
-
-header {
+/*Title, Input Fields, Save Button*/
+header{
 	background: #F9D6CF;
 	text-align: center;
 }
 
-.accent-color {
+.accent-color{
 	color: #F93811;
 }
 
-.input {
+.input{
 	width: 85%;
 	margin: 10px 10px 5px 10px;
 	height: 33px;
 	padding: 10px 5px;
-	/*padding-right: 10px auto;*/
 	border: 2px solid #D1D3D4;
 	font-size: 13pt;
 }
 
-.idea-input {
+.idea-input{
 	height: 78px;
 }
 
-input::placeholder {
-font-size: 13pt;
-color: #CFD8DC;
+input::placeholder{
+	font-size: 13pt;
+	color: #CFD8DC;
 }
 
 textarea{
@@ -60,13 +55,12 @@ textarea{
 	font-size: 13pt;
 }
 
-textarea::placeholder {
+textarea::placeholder{
 	font-size: 13pt;
 	color: #CFD8DC;
 }
 
-
-.button {
+.button{
 	background: #F97F66;
 	color: #FFFFFF;	
 	border: none;
@@ -81,46 +75,50 @@ textarea::placeholder {
 	background-color: grey;
 }
 
-.button:hover {
+.button:hover{
 	background: #F95939;
 }
 
-/*main container styles*/
+#body-char-count{
+	margin-left: 49%;
+	color: #D1D3D4;
+}
 
-.container {
+/*Main Container*/
+.container{
 	text-align: center;
 	margin-top: 5px;
 }
 
-.icon {
+.icon{
 	width: 25px;
 	height: 25px;
 }
 
-.right {
-	float: right;
+.right{
+	margin-left: 96%;
 }
 
-
-h2 {
+h2{
 	
 	color: #6D6E71;
 	font-size: 18px;
 }
 
-.idea-article {
+.idea-article{
 	width: 85%;
 	margin: 20px auto;
 	padding-top: 5px;
 	text-align: left;
 }
 
-#search-input {
+#search-input{
 	margin-top: 15px;
 }
 
+/*Importance Buttons*/
 ul{
-	width:85%;
+	width: 85%;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -145,108 +143,104 @@ li.active-filter{
 	color: #F98B76;
 }
 
-.icon-buttons {
+.icon-buttons{
 	height: 25px;
 	width: 25px;
-	/*display: inline;*/
 	margin-right: 15px;
 }
 
-.delete-button {
+.delete-button{
 	
 	background:url('../images/delete.svg');
 }
 
-.delete-button:hover {
+.delete-button:hover{
 	background: url('../images/delete-hover.svg');
 }
 
-.delete-button {
+.delete-button{
 	margin-top: -20px;
 	margin-right: 20px;
 }
 
-.upvote-button {
+.upvote-button{
 	background: url('../images/upvote.svg') 0 0 no-repeat;
 }
 
-.upvote-button:hover {
+.upvote-button:hover{
 	background:url('../images/upvote-hover.svg') 0 0 no-repeat;
 }
 
-.downvote-button {
+.downvote-button{
 	background: url('../images/downvote.svg');
 }
 
-.downvote-button:hover {
+.downvote-button:hover{
 	background: url('../images/downvote-hover.svg');
 }
 
-.quality-rank {
+.quality-rank{
 	display: flex;
 	flex-direction: row;
 	color: #6D6E71;
 	font-size: 10pt;
 }
 
-.idea-paragraph {
+.idea-paragraph{
 	color: #939598;
 	font-size: 12pt;
 	margin: 10px auto 20px auto;
 	
 }
 
-hr {
+hr{
 	border: 1px solid #D1D3D4;
 	margin-top: 20px;
 } 
 
-.card-display-none {
+.card-display-none{
 	display: none;
 }
 
-@media only screen and (min-width: 800px){
 
+@media only screen and (min-width: 550px){
 
-main.container {
-	text-align: center;
+	main.container{
+		text-align: center;
+	}
+
+	h1{
+		font-size: 27pt;
+		margin-bottom: 20px;
+		padding-top: 18px;
+	}
+
+	.input{
+		font-size: 18px;
+		margin: 5px 15px;
+		width: 50%;
+		height: 30px;
+	}
+
+	.idea-input{
+		height: 100px;
+	}
+
+	.button{
+		font-size: 17px;
+		height: 28px;
+		width: 50%;
+	}
+
+	.filter{
+		position: sticky;
+		top:0;
+    	width: 95%;
+/*    	z-index:100;
+*/	}
+	.idea-article{
+		width: 50%;
+		margin-left: auto;
+		margin-right: auto;
+	}
 }
-
-h1 {
-	font-size: 27pt;
-	margin-bottom: 20px;
-	padding-top: 18px;
-}
-
-.input {
-	font-size: 18px;
-	margin: 5px 15px;
-	width: 50%;
-	height: 30px;
-}
-
-.idea-input {
-	height: 100px;
-}
-
-.button {
-	font-size: 17px;
-	height: 28px;
-	width: 50%;
-}
-
-.idea-article {
-	width: 50%;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-
-
-}
-
-
-
-
-
-
