@@ -12,24 +12,14 @@ function cardRestore(){
 	keys.forEach(function(key){
 		localStorage[key]
 		prependIdea(JSON.parse(localStorage[key]))
-})
+	})
 }
-
-// getIdea(); I think this function below is not doing anything (as you said Friday?)
-// function getIdea(id) { * this function *
-// 	var retrieveIdea = JSON.parse(localStorage.getItem(id));
-// 	if (retrieveIdea) {
-// 		return retrieveIdea;
-// 	} else {
-// 		return [];
-// 	}
-// }
 
 $('.idea-input').keyup(enabledBtn);
 $('.main-title').keyup(enabledBtn);
 
-function enabledBtn() {
-    if ( $('.idea-input').val() === "" || $('.main-title').val() === "") {
+function enabledBtn(){
+    if ( $('.idea-input').val() === '' || $('.main-title').val() === '') {
       $('.enterButton').prop('disabled', true);
     } else {
       $('#submit-button').removeAttr('disabled');
@@ -49,7 +39,7 @@ function storeIdea (id, card) {
 	localStorage.setItem(id, JSON.stringify(card));
 }
 
-function addIdea(e) {
+function addIdea(e){
 	var title = $('.main-title').val();
 	var body = $('.idea-input').val();
 	var status = 'Normal';
@@ -59,7 +49,7 @@ function addIdea(e) {
 	$('.main-title').focus();
 }
 
-function prependIdea(idea) {
+function prependIdea(idea){
 	$('.bookmark-list').prepend(
 		`<article id=${idea.id} class="idea-article">
 		<h2 class="idea-title" contenteditable=true >${idea.title}</h2> 
@@ -89,7 +79,7 @@ function removeThis(e){
 
 $('.main-title , .idea-input').on('keyup', checkValue); 
 
-function checkValue(e) {;
+function checkValue(e){
 	if (e.keyCode === 13 && $('.main-title').val() !== '' && $('.idea-input').val() !== ''){
 		e.preventDefault();
 		addIdea();
@@ -150,54 +140,9 @@ function resetCard(newQuality,id){
 	localStorage.setItem(id, JSON.stringify(uniqueCard));
 }
 
-
-
-// function upVoteTodo(){
-// 	var qualityArr = ['swill', 'plausible', 'genius'];
-// 	var quality = $(this).parent().find('.quality-content').text();
-//     quality > qualityArr[0] ? quality = qualityArr[1] : quality = qualityArr[2]
-//     $(this).parent().find('.quality-content').text(quality);
-// 	console.log(quality)
-// }
-
-// console.log(qualityArr[0])
-	// $('.quality-content').text(qualityArr[i])
-
-// function upVoteTodo(e) {
-// 	var checkStatus = $(this).parent().find('.quality-content').text();
-// 	var id = ($(this).closest('.idea-article').attr('id'));
-// 	var uniqueCard = JSON.parse(localStorage.getItem(id));
-
-// 	if (checkStatus === 'swill') {	
-//     	$(this).parent().find('.quality-content').text('plausible');
-//     	uniqueCard.status = 'plausible';
-// 		localStorage.setItem(id, JSON.stringify(uniqueCard));
-//     } else {
-//     	$(this).parent().find('.quality-content').text('genius');
-//     	uniqueCard.status = 'genius';
-//     	localStorage.setItem(id, JSON.stringify(uniqueCard));
-//     }
-// };
-
-
-// function downVoteTodo() {
-//   	var checkStatus = $(this).parent().find('.quality-content').text();
-//   	var id = ($(this).closest('.idea-article').attr('id'));
-// 	var uniqueCard = JSON.parse(localStorage.getItem(id));
-//   	if (checkStatus === 'genius') {
-// 		$(this).parent().find('.quality-content').text('plausible');
-// 		uniqueCard.status = 'plausible';
-// 		localStorage.setItem(id, JSON.stringify(uniqueCard));
-//   	} else {
-//   		$(this).parent().find('.quality-content').text('');
-//   		uniqueCard.status = 'swill';
-// 		localStorage.setItem(id, JSON.stringify(uniqueCard));
-//   	}
-// };
-
 $('.bookmark-list').on('keyup', '.idea-title', editTitle);
 
-function editTitle (event){
+function editTitle(event){
 	var id = ($(this).closest('.idea-article').attr('id'));
 	var uniqueCard = JSON.parse(localStorage.getItem(id));
 	if (event.keyCode === 13) {
@@ -223,7 +168,7 @@ function editBody(event){
 
 $('.search-box').on('keyup', realtimeSearch)
 
-function realtimeSearch() {
+function realtimeSearch(){
     var searchTerm = $('.search-box').val().toUpperCase();
     $('.idea-article').each (function(index, element){
 	if (doYouMatch(searchTerm, index)) {
@@ -234,7 +179,7 @@ function realtimeSearch() {
    })
 }
 
-function doYouMatch (searchTerm, index) {
+function doYouMatch(searchTerm, index){
 	var title = $($('.idea-title')[index]).html();
 	var upperCaseTitle = title.toUpperCase();
 	var body = $($('.idea-paragraph')[index]).html();
@@ -251,12 +196,11 @@ function doYouMatch (searchTerm, index) {
 $('.filter').on('click',filterIdeas)
 
 //disables clicking styling spans
-$("span").css("pointer-events","none");
+$('span').css('pointer-events','none');
 
-function filterIdeas (e){
-	var filterNum = parseInt($(e.target).attr("class"));
+function filterIdeas(e){
+	var filterNum = parseInt($(e.target).attr('class'));
 	var translateQuality = retrieveQuality(filterNum);
-	
 	for (var i = 0 ; i < $('article').length; i++){
 		if ($($('article')[i]).find('.quality-content').text() === translateQuality){
 			($($('article')[i])).show();
@@ -265,17 +209,5 @@ function filterIdeas (e){
 			($($('article')[i])).hide();
 		}
 	}
-
-	($(e.target)).toggleClass("active-filter");
-
-
+	($(e.target)).toggleClass('active-filter');
 }
-
-
-
-
-
-
-
-
-
