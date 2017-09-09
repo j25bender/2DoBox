@@ -108,12 +108,12 @@ h2 {
 	margin-right: 15px;
 }
 
-.delete-button-div {
+.delete-button {
 	
 	background:url('../images/delete.svg');
 }
 
-.delete-button-div:hover {
+.delete-button:hover {
 	background: url('../images/delete-hover.svg');
 }
 
@@ -122,19 +122,19 @@ h2 {
 	margin-right: 20px;
 }
 
-.upvote-button-div {
+.upvote-button {
 	background: url('../images/upvote.svg') 0 0 no-repeat;
 }
 
-.upvote-button-div:hover {
+.upvote-button:hover {
 	background:url('../images/upvote-hover.svg') 0 0 no-repeat;
 }
 
-.downvote-button-div {
+.downvote-button {
 	background: url('../images/downvote.svg');
 }
 
-.downvote-button-div:hover {
+.downvote-button:hover {
 	background: url('../images/downvote-hover.svg');
 }
 
