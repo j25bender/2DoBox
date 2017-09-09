@@ -265,9 +265,9 @@ function filterIdeas (e){
 			($($('article')[i])).hide();
 		}
 	}
-	console.log(translateQuality);
-	
-	console.log($($('article')[0]).find('.quality-content').text());
+
+	($(e.target)).toggleClass("active-filter");
+
 
 }
 

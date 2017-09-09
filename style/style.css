@@ -137,6 +137,10 @@ li:hover{
 	background-color: #F9E5E0;
 }
 
+li.active-filter{
+	background-color: #F9E5E0;
+}
+
 .filter-accent{
 	color: #F98B76;
 }
