@@ -259,6 +259,7 @@ function filterIdeas (e){
 	
 	for (var i = 0 ; i < $('article').length; i++){
 		if ($($('article')[i]).find('.quality-content').text() === translateQuality){
+			($($('article')[i])).show();
 		}
 		else{
 			($($('article')[i])).hide();
