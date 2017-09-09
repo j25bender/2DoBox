@@ -79,6 +79,11 @@ textarea::placeholder{
 	background: #F95939;
 }
 
+#body-char-count{
+	margin-left: 49%;
+	color: #D1D3D4;
+}
+
 /*Main Container*/
 .container{
 	text-align: center;
@@ -196,6 +201,7 @@ hr{
 .card-display-none{
 	display: none;
 }
+
 
 @media only screen and (min-width: 550px){
 

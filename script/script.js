@@ -75,8 +75,6 @@ function removeThis(e){
 	localStorage.removeItem($(e.target).parent().attr('id'));
 }
 
-
-
 $('.main-title , .idea-input').on('keyup', checkValue); 
 
 function checkValue(e){
@@ -84,6 +82,14 @@ function checkValue(e){
 		e.preventDefault();
 		addIdea();
 	}
+	charCounter();
+}
+
+//Future home of autocomplete function...
+
+function charCounter(){
+	var bodyInput = $('#body-input').val();
+	$('#title-char-count').text(bodyInput.length);
 }
 
 $('.bookmark-list').on('click', '.upvote-button', upVoteTodo);

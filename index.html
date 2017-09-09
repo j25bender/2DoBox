@@ -7,24 +7,26 @@
 		<link href="style/reset.css" rel="stylesheet" type="text/css">
 		<link href="style/style.css" rel="stylesheet" type="text/css">
 		<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:700" rel="stylesheet">
-		<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:400" rel="stylesheet">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
 
 	<body>
 	<header>
-		<h1><span class="accent-color">2do</span>box </h1>
+		<h1><span class="accent-color">2do</span>box</h1>
 		<label for="title-input">
-			<input id ="title-input" class="main-title input" type="text" placeholder="Title">
+			<p><span id="title-char-count"></span></p>
+			<textarea id="title-input" class="main-title input" type="text" placeholder="Title" maxlength=120 spellcheck="true"></textarea>
 		</label> 
 
 		<label for="body-input">
-			<textarea id ="body-input" class="idea-input input" placeholder="Task"> </textarea>
+			<textarea id="body-input" class="idea-input input" placeholder="Task" maxlength=120 spellcheck="true"></textarea>
 		</label>
 
 		<label for="submit-button">
 			<input id="submit-button" class="button enterButton" type="button" value="save" disabled="true">
 		</label>
+		<p><span id="body-char-count"></span></p>
 	</header>
 
 	<main class="container">
