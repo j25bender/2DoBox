@@ -1,30 +1,31 @@
-$('.idea-input').keyup(enabledBtn);
-$('.main-title').keyup(enabledBtn);
-
-$(document).ready(function() {
+$(document).ready(onLoad);
 // getStoredCards()
-getIdea();
-cardRestore();
 
-});
-
+//TL: made on page-load function non-anonymous.
+function onLoad(){
+	getIdea();
+	cardRestore();
+}
 
 function getIdea(id) {
-	
 	var retrieveIdea = JSON.parse(localStorage.getItem(id));
-
-	if (retrieveIdea ) {
+	if (retrieveIdea) {
 		return retrieveIdea;
 	} else {
 		return [];
 	}
 }
 
+$('.idea-input').keyup(enabledBtn);
+$('.main-title').keyup(enabledBtn);
+
 function enabledBtn() {
-    if ( $('.idea-input').val() === "" && $('.main-title').val() === "") {
-      $('#submit-button').attr("disabled", true)
+    if ( $('.idea-input').val() === "" || $('.main-title').val() === "") {
+      $('.enterButton').prop('disabled', true);
+      console.log('trying to disable')
     } else {
-      $('#submit-button').attr("disabled", false);
+      $('#submit-button').removeAttr('disabled');
+      console.log('trying to enable');
     }
 }
 
@@ -53,6 +54,7 @@ function addIdea(e) {
 	var anotherIdea = new Idea(title, body, status);
 	prependIdea(anotherIdea);
 	storeIdea(anotherIdea.id, anotherIdea);
+	$('.main-title').focus();
 }
 
 function prependIdea(idea) {

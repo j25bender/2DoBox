@@ -63,6 +63,10 @@ color: #CFD8DC;
 
 }
 
+.button:disabled{
+	background-color: magenta;
+}
+
 .button:hover {
 	background: #045E55;
 }
