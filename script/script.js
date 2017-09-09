@@ -248,6 +248,21 @@ function doYouMatch (searchTerm, index) {
     }
 }
 
+$('.filter').on('click',filterIdeas)
+
+//disables clicking styling spans
+$("span").css("pointer-events","none");
+
+function filterIdeas (e){
+	var filterNum = parseInt($(e.target).attr("class"));
+	var translateQuality = retrieveQuality(filterNum);
+	console.log(translateQuality);
+	// for (var i = 0 ; i < Object.keys(localStorage).length ; i++){
+	// 	if ()
+	
+	
+
+}
 
 
 

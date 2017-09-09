@@ -67,7 +67,7 @@ textarea::placeholder {
 
 
 .button {
-	background: #00A79D;
+	background: #F97F66;
 	color: #FFFFFF;	
 	border: none;
 	width: 85%;
@@ -82,7 +82,7 @@ textarea::placeholder {
 }
 
 .button:hover {
-	background: #F97F66;
+	background: #F95939;
 }
 
 /*main container styles*/
@@ -131,6 +131,10 @@ li{
 	display: inline;
 	padding: 10px 20px;
 	border: 1px solid #F98B76;
+}
+
+li:hover{
+	background-color: #F9E5E0;
 }
 
 .filter-accent{
