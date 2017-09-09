@@ -3,18 +3,18 @@ $(document).ready(onLoad);
 
 //TL: made on page-load function non-anonymous.
 function onLoad(){
-	getIdea();
+	// getIdea(); I think this function below is not doing anything (as you said Friday?)
 	cardRestore();
 }
 
-function getIdea(id) {
-	var retrieveIdea = JSON.parse(localStorage.getItem(id));
-	if (retrieveIdea) {
-		return retrieveIdea;
-	} else {
-		return [];
-	}
-}
+// function getIdea(id) { * this function *
+// 	var retrieveIdea = JSON.parse(localStorage.getItem(id));
+// 	if (retrieveIdea) {
+// 		return retrieveIdea;
+// 	} else {
+// 		return [];
+// 	}
+// }
 
 $('.idea-input').keyup(enabledBtn);
 $('.main-title').keyup(enabledBtn);
@@ -22,10 +22,8 @@ $('.main-title').keyup(enabledBtn);
 function enabledBtn() {
     if ( $('.idea-input').val() === "" || $('.main-title').val() === "") {
       $('.enterButton').prop('disabled', true);
-      console.log('trying to disable')
     } else {
       $('#submit-button').removeAttr('disabled');
-      console.log('trying to enable');
     }
 }
 
@@ -91,10 +89,13 @@ function storeIdea (id, card) {
 $('.main-title , .idea-input').on('keyup', checkValue); 
 
 function checkValue(e) {
-	if (e.keyCode === 13 && ($('.main-title').val() !== '' && $('.idea-input').val() !== '')){
+	if (e.keyCode === 13 && $('.main-title').val() !== '' && $('.idea-input').val() !== ''){
+		e.preventDefault();
 		addIdea();
 	}
-};
+}
+
+
 
 $('.bookmark-list').on('click', '.upvote-button', upVoteTodo);
 

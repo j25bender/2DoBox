@@ -40,6 +40,7 @@ header {
 	padding: 10px 5px;
 	/*padding-right: 10px auto;*/
 	border: 2px solid #D1D3D4;
+	font-size: 13pt;
 }
 
 .idea-input {
@@ -49,6 +50,19 @@ header {
 input::placeholder {
 font-size: 13pt;
 color: #CFD8DC;
+}
+
+textarea{
+	resize: none;
+	width: 85%;
+	height: 100px;
+	margin: 10px 10px 5px 10px;
+	font-size: 13pt;
+}
+
+textarea::placeholder {
+	font-size: 13pt;
+	color: #CFD8DC;
 }
 
 
@@ -186,7 +200,7 @@ h1 {
 }
 
 .idea-input {
-	height: 30px;
+	height: 100px;
 }
 
 .button {
