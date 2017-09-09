@@ -4,11 +4,12 @@ $('.main-title').keyup(enabledBtn);
 $(document).ready(function() {
 // getStoredCards()
 getIdea();
+cardRestore();
 
 });
 
 
-function getIdea (id) {
+function getIdea(id) {
 	
 	var retrieveIdea = JSON.parse(localStorage.getItem(id));
 
@@ -29,22 +30,23 @@ function enabledBtn() {
 
 $('#submit-button').on('click', addIdea);
 
-var keys = Object.keys(localStorage)
+function cardRestore(){
+	var keys = Object.keys(localStorage)
+	keys.forEach(function(key){
+		localStorage[key]
+		console.log(localStorage[key])
+		prependIdea(JSON.parse(localStorage[key]))
+	})
+}
 
-keys.forEach(function(key){
-localStorage[key]
-prependIdea(JSON.parse(localStorage[key]))
-})
-
-
-function Idea (title, body, status ) {
+function Idea(title, body, status ) {
 	this.title = title;
 	this.body = body; 
 	this.status = 'swill'; 
 	this.id = Date.now();
 }
 
-function addIdea (e) {
+function addIdea(e) {
 	var title = $('.main-title').val();
 	var body = $('.idea-input').val();
 	var status = 'swill';
@@ -53,7 +55,7 @@ function addIdea (e) {
 	storeIdea(anotherIdea.id, anotherIdea);
 }
 
-function prependIdea (idea) {
+function prependIdea(idea) {
 	$('.bookmark-list').prepend(
 		`<article id=${idea.id} class="idea-article">
 		<h2 class="idea-title" contenteditable=true >${idea.title}</h2> 
@@ -74,7 +76,6 @@ function prependIdea (idea) {
 
 $('.bookmark-list').on('click', '.delete-button-div', removeThis);
 
-
 function removeThis(e){
 	$(e.target).parent().remove();
 	localStorage.removeItem($(e.target).parent().attr('id'));
@@ -85,78 +86,78 @@ function storeIdea (id, card) {
 	localStorage.setItem(id, JSON.stringify(card));
 }
 
-$('.main-title', '.idea-input').on('keyup', function (e) {
-	// if ($('.main-title').val() && $('.idea-input').val()){
-	// 	$('.enterButton').prop('disabled', false);
-	// }
-	if (e.keyCode === 13 && ($('.main-title').val() && $('.idea-input').val())){
-		addIdea(e)
+$('.main-title , .idea-input').on('keyup', checkValue); 
+
+function checkValue(e) {
+	if (e.keyCode === 13 && ($('.main-title').val() !== '' && $('.idea-input').val() !== '')){
+		addIdea();
 	}
+};
 
-});
+
+$('.bookmark-list').on('click', '.upvote-button-div', upVoteTodo);
 
 
-$('.bookmark-list').on('click', '.upvote-button-div', function() {
-	 	var checkStatus = $(this).closest('.quality-rank').find('.quality-content').text();
-	 	var id = ($(this).closest('.idea-article').attr('id'));
-	 	var uniqueCard = JSON.parse(localStorage.getItem(id));
+function upVoteTodo(e) {
+	var checkStatus = $(this).parent().find('.quality-content').text();
+	var id = ($(this).closest('.idea-article').attr('id'));
+	var uniqueCard = JSON.parse(localStorage.getItem(id));
 
-	 	if (checkStatus === 'swill') {
-     	
-     	$(this).closest('.quality-rank').find('.quality-content').text('plausible');
-     	uniqueCard.status = 'plausible';
+	if (checkStatus === 'swill') {	
+    	$(this).parent().find('.quality-content').text('plausible');
+    	uniqueCard.status = 'plausible';
 		localStorage.setItem(id, JSON.stringify(uniqueCard));
+    } else {
+    	$(this).parent().find('.quality-content').text('genius');
+    	uniqueCard.status = 'genius';
+    	localStorage.setItem(id, JSON.stringify(uniqueCard));
+    }
+};
 
-     	} else {
-     		$(this).closest('.quality-rank').find('.quality-content').text('genius');
-     		uniqueCard.status = 'genius';
-     		localStorage.setItem(id, JSON.stringify(uniqueCard));
-     	}
-	});
+$('.bookmark-list').on('click', '.downvote-button-div', downVoteTodo);
 
-
-$('.bookmark-list').on('click', '.downvote-button-div', function() {
-  	var checkStatus = $(this).closest('.quality-rank').find('.quality-content').text();
+function downVoteTodo() {
+  	var checkStatus = $(this).parent().find('.quality-content').text();
   	var id = ($(this).closest('.idea-article').attr('id'));
 	var uniqueCard = JSON.parse(localStorage.getItem(id));
 
-
-  if (checkStatus === 'genius') {
-	$(this).closest('.quality-rank').find('.quality-content').text('plausible');
-	uniqueCard.status = 'plausible';
-	localStorage.setItem(id, JSON.stringify(uniqueCard));
-  } else {
-  	$(this).closest('.quality-rank').find('.quality-content').text('swill');
-  	uniqueCard.status = 'swill';
-	localStorage.setItem(id, JSON.stringify(uniqueCard));
-  }
-});
+  	if (checkStatus === 'genius') {
+		$(this).parent().find('.quality-content').text('plausible');
+		uniqueCard.status = 'plausible';
+		localStorage.setItem(id, JSON.stringify(uniqueCard));
+  	} else {
+  		$(this).parent().find('.quality-content').text('swill');
+  		uniqueCard.status = 'swill';
+		localStorage.setItem(id, JSON.stringify(uniqueCard));
+  	}
+};
 
 $('.bookmark-list').on('keyup', '.idea-paragraph', editBody);
 
-function editBody(event) {
-var id = ($(this).closest('.idea-article').attr('id'));
-var uniqueCard = JSON.parse(localStorage.getItem(id));
-if (event.keyCode === 13) {
-	event.preventDefault();
-	this.blur();
-}
-uniqueCard.body = $(this).text();
-localStorage.setItem(id, JSON.stringify(uniqueCard));
+function editBody(event){
+	var id = ($(this).closest('.idea-article').attr('id'));
+	var uniqueCard = JSON.parse(localStorage.getItem(id));
+
+	if (event.keyCode === 13) {
+		event.preventDefault();
+		this.blur();
+	}
+	uniqueCard.body = $(this).text();
+	localStorage.setItem(id, JSON.stringify(uniqueCard));
 }
 
 
 $('.bookmark-list').on('keyup', '.idea-title', editTitle);
 
 function editTitle (event){
-var id = ($(this).closest('.idea-article').attr('id'));
-var uniqueCard = JSON.parse(localStorage.getItem(id));
-if (event.keyCode === 13) {
-	event.preventDefault();
-	this.blur();
-}
-uniqueCard.title = $(this).text();
-localStorage.setItem(id, JSON.stringify(uniqueCard));
+	var id = ($(this).closest('.idea-article').attr('id'));
+	var uniqueCard = JSON.parse(localStorage.getItem(id));
+	if (event.keyCode === 13) {
+		event.preventDefault();
+		this.blur();
+	}
+	uniqueCard.title = $(this).text();
+	localStorage.setItem(id, JSON.stringify(uniqueCard));
 }
 
 function realtimeSearch() {
@@ -175,30 +176,24 @@ function realtimeSearch() {
    })
 };
 
-
-
-
 $('.search-box').on('keyup', realtimeSearch)
 
- function doYouMatch (searchTerm, index) {
-    
-var title = $($('.idea-title')[index]).html();
-var upperCaseTitle = title.toUpperCase();
-var body = $($('.idea-paragraph')[index]).html();
-var upperCaseBody = body.toUpperCase();
+function doYouMatch (searchTerm, index) {
+	var title = $($('.idea-title')[index]).html();
+	var upperCaseTitle = title.toUpperCase();
+	var body = $($('.idea-paragraph')[index]).html();
+	var upperCaseBody = body.toUpperCase();
 
-// console.log(title)
-// console.log(body)
+	// console.log(title)
+	// console.log(body)
 
-if (upperCaseTitle.indexOf(searchTerm) !== -1) {
-	return true;
-}
- else if (upperCaseBody.indexOf(searchTerm) !== -1){
+	if (upperCaseTitle.indexOf(searchTerm) !== -1) {
+		return true;
+	} else if (upperCaseBody.indexOf(searchTerm) !== -1){
  	return true;
- } else {
-        return false
+ 	} else {
+    	return false
     };
-
 };
 
 
