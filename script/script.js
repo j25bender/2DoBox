@@ -256,11 +256,17 @@ $("span").css("pointer-events","none");
 function filterIdeas (e){
 	var filterNum = parseInt($(e.target).attr("class"));
 	var translateQuality = retrieveQuality(filterNum);
+	
+	for (var i = 0 ; i < $('article').length; i++){
+		if ($($('article')[i]).find('.quality-content').text() === translateQuality){
+		}
+		else{
+			($($('article')[i])).hide();
+		}
+	}
 	console.log(translateQuality);
-	// for (var i = 0 ; i < Object.keys(localStorage).length ; i++){
-	// 	if ()
 	
-	
+	console.log($($('article')[0]).find('.quality-content').text());
 
 }
 
