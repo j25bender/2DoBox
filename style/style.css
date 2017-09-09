@@ -25,12 +25,12 @@ font-family: 'Roboto Slab', serif;
 /*header styles*/
 
 header {
-	background: #E5F3F2;
+	background: #F9D6CF;
 	text-align: center;
 }
 
 .accent-color {
-	color: #00A79D;
+	color: #F93811;
 }
 
 .input {
@@ -78,11 +78,11 @@ textarea::placeholder {
 }
 
 .button:disabled{
-	background-color: magenta;
+	background-color: grey;
 }
 
 .button:hover {
-	background: #045E55;
+	background: #F97F66;
 }
 
 /*main container styles*/
@@ -117,6 +117,24 @@ h2 {
 
 #search-input {
 	margin-top: 15px;
+}
+
+ul{
+	width:85%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin: 5px auto;
+}
+
+li{
+	display: inline;
+	padding: 10px 20px;
+	border: 1px solid #F98B76;
+}
+
+.filter-accent{
+	color: #F98B76;
 }
 
 .icon-buttons {
