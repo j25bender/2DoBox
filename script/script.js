@@ -248,6 +248,28 @@ function doYouMatch (searchTerm, index) {
     }
 }
 
+$('.filter').on('click',filterIdeas)
+
+//disables clicking styling spans
+$("span").css("pointer-events","none");
+
+function filterIdeas (e){
+	var filterNum = parseInt($(e.target).attr("class"));
+	var translateQuality = retrieveQuality(filterNum);
+	
+	for (var i = 0 ; i < $('article').length; i++){
+		if ($($('article')[i]).find('.quality-content').text() === translateQuality){
+			($($('article')[i])).show();
+		}
+		else{
+			($($('article')[i])).hide();
+		}
+	}
+
+	($(e.target)).toggleClass("active-filter");
+
+
+}
 
 
 
