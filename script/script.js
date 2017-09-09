@@ -11,7 +11,6 @@ function cardRestore(){
 	var keys = Object.keys(localStorage)
 	keys.forEach(function(key){
 		localStorage[key]
-		console.log(localStorage[key])
 		prependIdea(JSON.parse(localStorage[key]))
 })
 }
@@ -97,8 +96,6 @@ function checkValue(e) {;
 	}
 }
 
-
-
 $('.bookmark-list').on('click', '.upvote-button', upVoteTodo);
 
 function upVoteTodo(){
@@ -149,7 +146,6 @@ function retrieveQuality(newNumber){
 
 function resetCard(newQuality,id){
 	var uniqueCard = JSON.parse(localStorage.getItem(id));
-	console.log(uniqueCard);
 	uniqueCard.status = newQuality;
 	localStorage.setItem(id, JSON.stringify(uniqueCard));
 }
@@ -217,7 +213,6 @@ $('.bookmark-list').on('keyup', '.idea-paragraph', editBody);
 function editBody(event){
 	var id = ($(this).closest('.idea-article').attr('id'));
 	var uniqueCard = JSON.parse(localStorage.getItem(id));
-
 	if (event.keyCode === 13) {
 		event.preventDefault();
 		this.blur();
@@ -230,15 +225,14 @@ $('.search-box').on('keyup', realtimeSearch)
 
 function realtimeSearch() {
     var searchTerm = $('.search-box').val().toUpperCase();
-    console.log(searchTerm);
-    $('.idea-article').each ( function (index, element) {
+    $('.idea-article').each (function(index, element){
 	if (doYouMatch(searchTerm, index)) {
             $(element).removeClass('card-display-none');
         } else {
             $(element).addClass('card-display-none');
-        };
+        }
    })
-};
+}
 
 function doYouMatch (searchTerm, index) {
 	var title = $($('.idea-title')[index]).html();
@@ -250,9 +244,9 @@ function doYouMatch (searchTerm, index) {
 	} else if (upperCaseBody.indexOf(searchTerm) !== -1){
  		return true;
  	} else {
-    	return false
-    };
-};
+    	return false;
+    }
+}
 
 
 
