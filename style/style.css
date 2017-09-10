@@ -100,7 +100,6 @@ textarea::placeholder{
 }
 
 h2{
-	
 	color: #6D6E71;
 	font-size: 18px;
 }
@@ -190,7 +189,6 @@ li.active-filter{
 	color: #939598;
 	font-size: 12pt;
 	margin: 10px auto 20px auto;
-	
 }
 
 hr{
@@ -203,7 +201,7 @@ hr{
 }
 
 
-@media only screen and (min-width: 550px){
+@media only screen and (min-width: 600px){
 
 	main.container{
 		text-align: center;
@@ -233,11 +231,9 @@ hr{
 	}
 
 	.filter{
-		position: sticky;
-		top:0;
-    	width: 95%;
-/*    	z-index:100;
-*/	}
+		
+	}
+
 	.idea-article{
 		width: 50%;
 		margin-left: auto;
