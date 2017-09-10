@@ -22,10 +22,11 @@ $('.restore-completed').on('click',restoreCompleted);
 function restoreCompleted(){
 	var keys = Object.keys(localStorage);
 	keys.forEach(function(key){
-		if(JSON.parse(localStorage[key]).completed === true){
+		if(JSON.parse(localStorage[key]).completed === true && $('article#'+key).length === 0){
 			prependCompleted(JSON.parse(localStorage[key]));
 		}
 	})
+	$('.restore-completed').prop('disabled',true);
 }
 
 function countCompleted(){
