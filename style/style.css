@@ -90,6 +90,10 @@ textarea::placeholder{
 	margin-top: 5px;
 }
 
+span.filtering{
+	display: block;
+}
+
 .icon{
 	width: 25px;
 	height: 25px;
@@ -122,12 +126,18 @@ ul{
 	justify-content: space-between;
 	align-items: center;
 	margin: 5px auto;
+	font-size: 10px;
 }
 
 li{
 	display: inline;
-	padding: 10px 20px;
+	padding: 5px 10px;
 	border: 1px solid #F98B76;
+	font-size: 10px;
+}
+
+li.5{
+	margin-right: 0px;
 }
 
 li:hover{
@@ -213,10 +223,20 @@ hr{
 		padding-top: 18px;
 	}
 
+	ul{
+		width: 70%;
+		font-size: 13px;
+	}
+
+
+	li{
+		font-size: 13px;
+	}
+	
 	.input{
 		font-size: 18px;
 		margin: 5px 15px;
-		width: 50%;
+		width: 70%;
 		height: 30px;
 	}
 
@@ -227,7 +247,7 @@ hr{
 	.button{
 		font-size: 17px;
 		height: 28px;
-		width: 50%;
+		width: 70%;
 	}
 
 	.filter{
