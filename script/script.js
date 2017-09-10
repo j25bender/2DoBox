@@ -18,6 +18,19 @@ function cardRestore(){
 	})
 }
 
+$('.restore-completed').on('click',restoreCompleted);
+
+function restoreCompleted(){
+	var keys = Object.keys(localStorage);
+	keys.forEach(function(key){
+		localStorage[key]
+		if(JSON.parse(localStorage[key]).completed === true){
+			prependCompleted(JSON.parse(localStorage[key]));
+		}
+	})
+	$('.restore-completed').prop('disabled',true);
+}
+
 $('.main-title , .idea-input').on('keyup', enabledBtn);
 
 function enabledBtn(){
@@ -58,6 +71,26 @@ function prependIdea(idea){
 			<h2 class="idea-title" contenteditable=true >${idea.title}</h2> 
 			<div class="icon-buttons delete-button right"></div>
 			<p contenteditable="true" class="idea-paragraph">${idea.body}</p>
+	<div class="quality-completed">
+		<div class="quality-rank"> 
+			<div class="icon-buttons upvote-button"></div>
+			<div class="icon-buttons downvote-button"></div>
+			<p> importance: <span class = "quality-content">${idea.status}</span> </p> 
+		</div> 
+		<button class="isCompleted"> Completed </button>
+	</div>
+		<hr/> 
+</article>`)
+	$('.main-title').val("");
+	$('.idea-input').val("");
+}
+
+function prependCompleted(idea){
+	$('.bookmark-list').prepend(
+		`<article id=${idea.id} class="idea-article completed">
+			<h2 class="idea-title completed" contenteditable=true >${idea.title}</h2> 
+			<div class="icon-buttons delete-button right"></div>
+			<p contenteditable="true" class="idea-paragraph completed">${idea.body}</p>
 	<div class="quality-completed">
 		<div class="quality-rank"> 
 			<div class="icon-buttons upvote-button"></div>

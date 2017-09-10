@@ -127,6 +127,22 @@ h2.completed{
 	margin-top: 15px;
 }
 
+button.restore-completed{
+	background-color: #F97F66 ;
+	display: block;
+	margin: 0px auto;
+	border: 1px solid #F97F66;
+	font-size: 15px;
+}
+
+button.restore-completed:hover{
+	background-color: #F95939
+}
+
+button.restore-completed:disabled{
+	background-color: #F9F1EF;
+}
+
 /*Importance Buttons*/
 ul{
 	width: 85%;
