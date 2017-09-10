@@ -30,6 +30,7 @@ function Idea(title, body, status ) {
 	this.body = body; 
 	this.status = 'Normal'; 
 	this.id = Date.now();
+	this.completed = false;
 }
 
 $('#submit-button').on('click', addIdea);
@@ -182,9 +183,9 @@ function markCompleted(event){
 	($(this).closest('.idea-article')).toggleClass('completed');
 	($(this).closest('.idea-article').find('.idea-title')).toggleClass('completed');
 	($(this).closest('.idea-article').find('.idea-paragraph')).toggleClass('completed');
-	// console.log($(this).closest('.idea-article')).find('.idea-paragraph');
-	
-
+	var storedObj = JSON.parse(localStorage.getItem(($(this).closest('.idea-article')).attr('id')));
+	storedObj.completed = ($(this).closest('.idea-article')).hasClass('completed');
+	localStorage.setItem(($(this).closest('.idea-article')).attr('id'),JSON.stringify(storedObj));
 }
 
 $('.search-box').on('keyup', realtimeSearch)
