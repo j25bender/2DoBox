@@ -15,11 +15,10 @@ function cardRestore(){
 	})
 }
 
-$('.idea-input').keyup(enabledBtn);
-$('.main-title').keyup(enabledBtn);
+$('.main-title , .idea-input').on('keyup', enabledBtn);
 
 function enabledBtn(){
-    if ( $('.idea-input').val() === '' || $('.main-title').val() === '') {
+    if ($('.idea-input').val() === '' || $('.main-title').val() === '') {
       $('.enterButton').prop('disabled', true);
     } else {
       $('#submit-button').removeAttr('disabled');
@@ -75,21 +74,25 @@ function removeThis(e){
 	localStorage.removeItem($(e.target).parent().attr('id'));
 }
 
-$('.main-title , .idea-input').on('keyup', checkValue); 
+$('.main-title , .idea-input').on('keyup', returnBtnCheckValue); 
 
-function checkValue(e){
+function returnBtnCheckValue(e){
 	if (e.keyCode === 13 && $('.main-title').val() !== '' && $('.idea-input').val() !== ''){
 		e.preventDefault();
 		addIdea();
 	}
-	charCounter();
+	charCounter(e);
 }
 
 //Future home of autocomplete function...
 
-function charCounter(){
+function charCounter(e){
 	var bodyInput = $('#body-input').val();
 	$('#title-char-count').text(bodyInput.length);
+	if (bodyInput.length >= 120 || bodyInput.length >= 120 && e.keyCode === 13){
+		$('#title-char-count').text('Input can not exceed 120 characters!');
+		e.preventDefault();
+	}
 }
 
 $('.bookmark-list').on('click', '.upvote-button', upVoteTodo);
