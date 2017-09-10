@@ -11,7 +11,10 @@ function cardRestore(){
 	var keys = Object.keys(localStorage);
 	keys.forEach(function(key){
 		localStorage[key]
-		prependIdea(JSON.parse(localStorage[key]))
+		if(JSON.parse(localStorage[key]).completed === true){
+
+		}else{
+		prependIdea(JSON.parse(localStorage[key]))}
 	})
 }
 
