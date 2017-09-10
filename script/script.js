@@ -58,7 +58,7 @@ function prependIdea(idea){
 		<div class="quality-rank"> 
 			<div class="icon-buttons upvote-button"></div>
 			<div class="icon-buttons downvote-button"></div>
-			<p> quality: <span class = "quality-content">${idea.status}</span> </p> 
+			<p> importance: <span class = "quality-content">${idea.status}</span> </p> 
 		</div> 
 		<button class="isCompleted"> Completed </button>
 	</div>
@@ -174,6 +174,17 @@ function editBody(event){
 	}
 	uniqueCard.body = $(this).text();
 	localStorage.setItem(id, JSON.stringify(uniqueCard));
+}
+
+$('.bookmark-list').on('click', '.isCompleted', markCompleted);
+
+function markCompleted(event){
+	($(this).closest('.idea-article')).toggleClass('completed');
+	($(this).closest('.idea-article').find('.idea-title')).toggleClass('completed');
+	($(this).closest('.idea-article').find('.idea-paragraph')).toggleClass('completed');
+	// console.log($(this).closest('.idea-article')).find('.idea-paragraph');
+	
+
 }
 
 $('.search-box').on('keyup', realtimeSearch)

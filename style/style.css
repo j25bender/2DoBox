@@ -108,11 +108,19 @@ h2{
 	font-size: 18px;
 }
 
+h2.completed{
+	text-decoration: line-through;
+}
+
 .idea-article{
 	width: 85%;
 	margin: 20px auto;
 	padding-top: 5px;
 	text-align: left;
+}
+
+.idea-article.completed{
+	background-color: #F9F1EF;
 }
 
 #search-input{
@@ -204,6 +212,10 @@ li.active-filter{
 	color: #939598;
 	font-size: 12pt;
 	margin: 10px auto 20px auto;
+}
+
+.idea-paragraph.completed{
+	text-decoration: line-through;
 }
 
 hr{
