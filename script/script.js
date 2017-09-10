@@ -69,8 +69,9 @@ function prependIdea(idea){
 		<p contenteditable="true" id="due-date">${idea.dueDate}</p>
 		<hr /> 
 		</article>`)
-	$('.main-title').val("");
-	$('.idea-input').val("");
+	$('.main-title').val('');
+	$('.idea-input').val('');
+	$('input[type="date"]').val('');
 }
 
 $('.bookmark-list').on('click', '.delete-button', removeThis);
@@ -88,6 +89,33 @@ function checkValue(e){
 		addIdea();
 	}
 	charCounter();
+	formatNowDate();
+	nowDateCompareDueDate(e);
+}
+
+function formatNowDate(currentDate){
+	var newDate = new Date();
+	var year = newDate.getFullYear();
+	var month = newDate.getMonth() + 1;
+	var day = newDate.getDate();
+	var formatedDate = year + '-' + month + '-' + day;
+	return formatedDate;
+}
+
+function nowDateCompareDueDate(e){
+	// var something = formatNowDate(somethingelse);
+	//You can surprisingly use > < = on Date https://stackoverflow.com/questions/492994/compare-two-dates-with-javascript
+	for (var i = 0 ; i < $('article').length; i++){
+		if ($($('article')[i]).find('#due-date').text() > '2017-09-20'){
+			// formatNowDate()
+			console.log('cheezeberger')
+			// ($($('article')[i])).show();
+		}
+		else{
+			console.log('doggs')
+			// ($($('article')[i])).hide();
+		}
+	}
 }
 
 //Future home of autocomplete function...
