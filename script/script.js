@@ -22,13 +22,17 @@ $('.restore-completed').on('click',restoreCompleted);
 
 function restoreCompleted(){
 	var keys = Object.keys(localStorage);
+	var restoreLength = 0;
 	keys.forEach(function(key){
 		localStorage[key]
 		if(JSON.parse(localStorage[key]).completed === true){
 			prependCompleted(JSON.parse(localStorage[key]));
+			restoreLength++;
 		}
 	})
+	if(restoreLength > 0){
 	$('.restore-completed').prop('disabled',true);
+	}
 }
 
 $('.main-title , .idea-input').on('keyup', enabledBtn);
