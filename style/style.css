@@ -79,6 +79,13 @@ textarea::placeholder{
 	background: #F95939;
 }
 
+.text-due-date,
+#due-date{
+	display: inline-block;
+	margin: 0 auto;
+	width: 50%;
+}
+
 #body-char-count{
 	margin-left: 49%;
 	color: #D1D3D4;
