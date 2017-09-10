@@ -4,15 +4,14 @@ $(document).ready(onLoad);
 //TL: made on page-load function non-anonymous.
 function onLoad(){
 	cardRestore();
+	completedDisable();
 	$('#title-input').focus();
 }
 
 function cardRestore(){
 	var keys = Object.keys(localStorage);
 	keys.forEach(function(key){
-		localStorage[key]
 		if(JSON.parse(localStorage[key]).completed === true){
-
 		}else{
 		prependIdea(JSON.parse(localStorage[key]))}
 	})
@@ -22,16 +21,27 @@ $('.restore-completed').on('click',restoreCompleted);
 
 function restoreCompleted(){
 	var keys = Object.keys(localStorage);
-	var restoreLength = 0;
 	keys.forEach(function(key){
-		localStorage[key]
 		if(JSON.parse(localStorage[key]).completed === true){
 			prependCompleted(JSON.parse(localStorage[key]));
+		}
+	})
+}
+
+function countCompleted(){
+	var keys = Object.keys(localStorage);
+	var restoreLength = 0;
+	keys.forEach(function(key){
+		if(JSON.parse(localStorage[key]).completed === true){
 			restoreLength++;
 		}
 	})
-	if(restoreLength > 0){
-	$('.restore-completed').prop('disabled',true);
+	return restoreLength;
+}
+
+function completedDisable(){
+	if(countCompleted() === 0){
+		$('.restore-completed').prop('disabled',true);
 	}
 }
 
