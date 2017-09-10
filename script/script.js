@@ -8,7 +8,7 @@ function onLoad(){
 }
 
 function cardRestore(){
-	var keys = Object.keys(localStorage)
+	var keys = Object.keys(localStorage);
 	keys.forEach(function(key){
 		localStorage[key]
 		prependIdea(JSON.parse(localStorage[key]))
@@ -51,18 +51,19 @@ function addIdea(e){
 function prependIdea(idea){
 	$('.bookmark-list').prepend(
 		`<article id=${idea.id} class="idea-article">
-		<h2 class="idea-title" contenteditable=true >${idea.title}</h2> 
-		<div class="icon-buttons delete-button right">
-		</div>
-		<p contenteditable="true" class="idea-paragraph">${idea.body}</p>
+			<h2 class="idea-title" contenteditable=true >${idea.title}</h2> 
+			<div class="icon-buttons delete-button right"></div>
+			<p contenteditable="true" class="idea-paragraph">${idea.body}</p>
+	<div class="quality-completed">
 		<div class="quality-rank"> 
-		<div class="icon-buttons upvote-button">
-		</div>
-		<div class="icon-buttons downvote-button"> 
-		</div>
-		<p> quality: <span class = "quality-content">${idea.status}</span> </p> </div>
-		<hr /> 
-		</article>`)
+			<div class="icon-buttons upvote-button"></div>
+			<div class="icon-buttons downvote-button"></div>
+			<p> quality: <span class = "quality-content">${idea.status}</span> </p> 
+		</div> 
+		<button class="isCompleted"> Completed </button>
+	</div>
+		<hr/> 
+</article>`)
 	$('.main-title').val("");
 	$('.idea-input').val("");
 }

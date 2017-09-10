@@ -187,11 +187,16 @@ li.active-filter{
 .downvote-button:hover{
 	background: url('../images/downvote-hover.svg');
 }
+.quality-completed{
+	display: flex;
+	justify-content: space-between;
+}
 
 .quality-rank{
 	display: flex;
 	flex-direction: row;
 	color: #6D6E71;
+	align-items: center;
 	font-size: 10pt;
 }
 
@@ -232,7 +237,7 @@ hr{
 	li{
 		font-size: 13px;
 	}
-	
+
 	.input{
 		font-size: 18px;
 		margin: 5px 15px;
@@ -255,7 +260,7 @@ hr{
 	}
 
 	.idea-article{
-		width: 50%;
+		width: 70%;
 		margin-left: auto;
 		margin-right: auto;
 	}
