@@ -141,9 +141,9 @@ function returnBtnCheckValue(e){
 
 function charCounter(e){
 	var bodyInput = $('#body-input').val();
-	$('#title-char-count').text(bodyInput.length);
+	$('#body-char-count').text(120 - bodyInput.length);
 	if (bodyInput.length >= 120 || bodyInput.length >= 120 && e.keyCode === 13){
-		$('#title-char-count').text('Input can not exceed 120 characters!');
+		$('#body-char-count').text('Input can not exceed 120 characters!');
 		e.preventDefault();
 	}
 }
