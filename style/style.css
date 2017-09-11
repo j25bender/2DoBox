@@ -68,7 +68,6 @@ textarea::placeholder{
 	margin: 10px 10px 20px 10px;
 	height: 35px;
 	font-size: 18px;
-
 }
 
 .button:disabled{
@@ -79,9 +78,13 @@ textarea::placeholder{
 	background: #F95939;
 }
 
-#body-char-count{
-	margin-left: 49%;
+span#body-char-count{
 	color: #D1D3D4;
+	margin-left: 60%;
+	position: relative;
+	z-index: 2;
+	bottom: 45px;
+	font-size: 35px;
 }
 
 /*Main Container*/
