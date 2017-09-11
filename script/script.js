@@ -90,7 +90,7 @@ function prependIdea(idea){
 		<div class="quality-rank"> 
 			<div class="icon-buttons upvote-button"></div>
 			<div class="icon-buttons downvote-button"></div>
-			<p> importance: <span class = "quality-content">${idea.status}</span> </p> 
+			<p class="importance"> importance: <span class = "quality-content">${idea.status}</span> </p> 
 		</div> 
 		<button class="isCompleted"> Completed </button>
 	</div>
@@ -110,7 +110,7 @@ function prependCompleted(idea){
 		<div class="quality-rank"> 
 			<div class="icon-buttons upvote-button"></div>
 			<div class="icon-buttons downvote-button"></div>
-			<p> importance: <span class = "quality-content">${idea.status}</span> </p> 
+			<p class="importance completed"> importance: <span class = "quality-content">${idea.status}</span> </p> 
 		</div> 
 		<button class="isCompleted"> Completed </button>
 	</div>
@@ -234,6 +234,7 @@ function markCompleted(event){
 	($(this).closest('.idea-article')).toggleClass('completed');
 	($(this).closest('.idea-article').find('.idea-title')).toggleClass('completed');
 	($(this).closest('.idea-article').find('.idea-paragraph')).toggleClass('completed');
+	($(this).closest('.idea-article').find('.importance')).toggleClass('completed');
 	var storedObj = JSON.parse(localStorage.getItem(($(this).closest('.idea-article')).attr('id')));
 	storedObj.completed = ($(this).closest('.idea-article')).hasClass('completed');
 	localStorage.setItem(($(this).closest('.idea-article')).attr('id'),JSON.stringify(storedObj));
@@ -282,5 +283,27 @@ function filterIdeas(e){
 			($($('article')[i])).hide();
 		}
 	}
+	checkFilters(e);
+}
+
+function checkFilters(e){
 	($(e.target)).toggleClass('active-filter');
+	if(($('.active-filter').length)===2){
+		removeAllFilters();
+		($(e.target)).toggleClass('active-filter');
+	}else if (($('.active-filter').length)===0){
+		showAllArticles();
+	}
+}
+
+function showAllArticles(){
+	for (var i = 0 ; i < $('article').length ; i++){
+		($($('article')[i])).show();
+	}
+}
+
+function removeAllFilters(){
+	for (var i = 0 ; i < $('li').length ; i++){
+		($($('li')[i])).removeClass('active-filter');
+	}
 }
