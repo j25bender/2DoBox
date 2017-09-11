@@ -5,6 +5,9 @@ $(document).ready(onLoad);
 function onLoad(){
 	cardRestore();
 	completedDisable();
+	unhideShowMore();
+	showArticles(10);
+	showMoreDisable(10);
 	$('#title-input').focus();
 }
 
@@ -79,7 +82,9 @@ function addIdea(e){
 	var dueDate = getDueDate.val();
 	var anotherIdea = new Idea(title, body, status, dueDate);
 	prependIdea(anotherIdea);
+	unhideShowMore();
 	storeIdea(anotherIdea.id, anotherIdea);
+	showArticles(10);
 	$('.main-title').focus();
 }
 
@@ -129,7 +134,9 @@ $('.bookmark-list').on('click', '.delete-button', removeThis);
 
 function removeThis(e){
 	$(e.target).parent().remove();
+	unhideShowMore();
 	localStorage.removeItem($(e.target).parent().attr('id'));
+	showArticles(10);
 }
 
 $('.main-title , .idea-input').on('keyup', returnBtnCheckValue); 
@@ -139,6 +146,7 @@ function returnBtnCheckValue(e){
 		e.preventDefault();
 		addIdea();
 	}
+	unhideShowMore();
 	charCounter(e);
 	formatNowDate();
 	nowDateCompareDueDate(e);
@@ -170,9 +178,9 @@ function nowDateCompareDueDate(e){
 
 function charCounter(e){
 	var bodyInput = $('#body-input').val();
-	$('#title-char-count').text(bodyInput.length);
+	$('#body-char-count').text(120 - bodyInput.length);
 	if (bodyInput.length >= 120 || bodyInput.length >= 120 && e.keyCode === 13){
-		$('#title-char-count').text('Input can not exceed 120 characters!');
+		$('#body-char-count').text('Input can not exceed 120 characters!');
 		e.preventDefault();
 	}
 }
@@ -336,3 +344,46 @@ function removeAllFilters(){
 		($($('li')[i])).removeClass('active-filter');
 	}
 }
+
+$('.show-more').on('click',showMore);
+
+function showArticles(n){
+	var artLength = $('article').length;
+		for (var i = 0 ; i < artLength ; i++){
+			if (i < n){
+				$($('article')[i]).show();
+				console.log('first ten');
+			}else{
+				$($('article')[i]).hide();	
+				console.log('rest');	
+			}
+		}
+	showMoreDisable(10);
+	console.log('showten function');
+}
+
+function unhideShowMore(){
+	if ($('article').length > 10){
+		$('.show-more').show();
+	}
+}
+
+function showMore(){
+	var showHowMany = $('article:visible').length;
+	showHowMany += 10;
+	console.log(showHowMany);
+	showArticles(showHowMany);
+	showMoreDisable(showHowMany);
+}
+
+function showMoreDisable(n){
+	if (n > $('article').length){
+		$('.show-more').prop('disabled',true);
+	}else{
+		$('.show-more').prop('disabled',false);
+	}
+}
+
+
+
+
