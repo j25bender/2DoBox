@@ -90,6 +90,10 @@ textarea::placeholder{
 	margin-top: 5px;
 }
 
+span.filtering{
+	display: block;
+}
+
 .icon{
 	width: 25px;
 	height: 25px;
@@ -104,15 +108,39 @@ h2{
 	font-size: 18px;
 }
 
+h2.completed{
+	text-decoration: line-through;
+}
+
 .idea-article{
 	width: 85%;
 	margin: 20px auto;
-	padding-top: 5px;
+	padding: 5px;
 	text-align: left;
+}
+
+.idea-article.completed{
+	background-color: #F9F1EF;
 }
 
 #search-input{
 	margin-top: 15px;
+}
+
+button.restore-completed{
+	background-color: #F97F66 ;
+	display: block;
+	margin: 0px auto;
+	border: 1px solid #F97F66;
+	font-size: 15px;
+}
+
+button.restore-completed:hover{
+	background-color: #F95939
+}
+
+button.restore-completed:disabled{
+	background-color: #F9F1EF;
 }
 
 /*Importance Buttons*/
@@ -122,12 +150,18 @@ ul{
 	justify-content: space-between;
 	align-items: center;
 	margin: 5px auto;
+	font-size: 10px;
 }
 
 li{
 	display: inline;
-	padding: 10px 20px;
+	padding: 5px 10px;
 	border: 1px solid #F98B76;
+	font-size: 10px;
+}
+
+li.5{
+	margin-right: 0px;
 }
 
 li:hover{
@@ -177,11 +211,16 @@ li.active-filter{
 .downvote-button:hover{
 	background: url('../images/downvote-hover.svg');
 }
+.quality-completed{
+	display: flex;
+	justify-content: space-between;
+}
 
 .quality-rank{
 	display: flex;
 	flex-direction: row;
 	color: #6D6E71;
+	align-items: center;
 	font-size: 10pt;
 }
 
@@ -189,6 +228,10 @@ li.active-filter{
 	color: #939598;
 	font-size: 12pt;
 	margin: 10px auto 20px auto;
+}
+
+.idea-paragraph.completed{
+	text-decoration: line-through;
 }
 
 hr{
@@ -213,10 +256,20 @@ hr{
 		padding-top: 18px;
 	}
 
+	ul{
+		width: 70%;
+		font-size: 13px;
+	}
+
+
+	li{
+		font-size: 13px;
+	}
+
 	.input{
 		font-size: 18px;
 		margin: 5px 15px;
-		width: 50%;
+		width: 70%;
 		height: 30px;
 	}
 
@@ -227,7 +280,7 @@ hr{
 	.button{
 		font-size: 17px;
 		height: 28px;
-		width: 50%;
+		width: 70%;
 	}
 
 	.filter{
@@ -235,7 +288,7 @@ hr{
 	}
 
 	.idea-article{
-		width: 50%;
+		width: 70%;
 		margin-left: auto;
 		margin-right: auto;
 	}

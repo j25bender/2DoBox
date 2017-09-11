@@ -4,15 +4,46 @@ $(document).ready(onLoad);
 //TL: made on page-load function non-anonymous.
 function onLoad(){
 	cardRestore();
+	completedDisable();
 	$('#title-input').focus();
 }
 
 function cardRestore(){
-	var keys = Object.keys(localStorage)
+	var keys = Object.keys(localStorage);
 	keys.forEach(function(key){
-		localStorage[key]
-		prependIdea(JSON.parse(localStorage[key]))
+		if(JSON.parse(localStorage[key]).completed === true){
+		}else{
+		prependIdea(JSON.parse(localStorage[key]))}
 	})
+}
+
+$('.restore-completed').on('click',restoreCompleted);
+
+function restoreCompleted(){
+	var keys = Object.keys(localStorage);
+	keys.forEach(function(key){
+		if(JSON.parse(localStorage[key]).completed === true && $('article#'+key).length === 0){
+			prependCompleted(JSON.parse(localStorage[key]));
+		}
+	})
+	$('.restore-completed').prop('disabled',true);
+}
+
+function countCompleted(){
+	var keys = Object.keys(localStorage);
+	var restoreLength = 0;
+	keys.forEach(function(key){
+		if(JSON.parse(localStorage[key]).completed === true){
+			restoreLength++;
+		}
+	})
+	return restoreLength;
+}
+
+function completedDisable(){
+	if(countCompleted() === 0){
+		$('.restore-completed').prop('disabled',true);
+	}
 }
 
 $('.main-title , .idea-input').on('keyup', enabledBtn);
@@ -30,6 +61,7 @@ function Idea(title, body, status ) {
 	this.body = body; 
 	this.status = 'Normal'; 
 	this.id = Date.now();
+	this.completed = false;
 }
 
 $('#submit-button').on('click', addIdea);
@@ -51,18 +83,39 @@ function addIdea(e){
 function prependIdea(idea){
 	$('.bookmark-list').prepend(
 		`<article id=${idea.id} class="idea-article">
-		<h2 class="idea-title" contenteditable=true >${idea.title}</h2> 
-		<div class="icon-buttons delete-button right">
-		</div>
-		<p contenteditable="true" class="idea-paragraph">${idea.body}</p>
+			<h2 class="idea-title" contenteditable=true >${idea.title}</h2> 
+			<div class="icon-buttons delete-button right"></div>
+			<p contenteditable="true" class="idea-paragraph">${idea.body}</p>
+	<div class="quality-completed">
 		<div class="quality-rank"> 
-		<div class="icon-buttons upvote-button">
-		</div>
-		<div class="icon-buttons downvote-button"> 
-		</div>
-		<p> quality: <span class = "quality-content">${idea.status}</span> </p> </div>
-		<hr /> 
-		</article>`)
+			<div class="icon-buttons upvote-button"></div>
+			<div class="icon-buttons downvote-button"></div>
+			<p> importance: <span class = "quality-content">${idea.status}</span> </p> 
+		</div> 
+		<button class="isCompleted"> Completed </button>
+	</div>
+		<hr/> 
+</article>`)
+	$('.main-title').val("");
+	$('.idea-input').val("");
+}
+
+function prependCompleted(idea){
+	$('.bookmark-list').prepend(
+		`<article id=${idea.id} class="idea-article completed">
+			<h2 class="idea-title completed" contenteditable=true >${idea.title}</h2> 
+			<div class="icon-buttons delete-button right"></div>
+			<p contenteditable="true" class="idea-paragraph completed">${idea.body}</p>
+	<div class="quality-completed">
+		<div class="quality-rank"> 
+			<div class="icon-buttons upvote-button"></div>
+			<div class="icon-buttons downvote-button"></div>
+			<p> importance: <span class = "quality-content">${idea.status}</span> </p> 
+		</div> 
+		<button class="isCompleted"> Completed </button>
+	</div>
+		<hr/> 
+</article>`)
 	$('.main-title').val("");
 	$('.idea-input').val("");
 }
@@ -173,6 +226,17 @@ function editBody(event){
 	}
 	uniqueCard.body = $(this).text();
 	localStorage.setItem(id, JSON.stringify(uniqueCard));
+}
+
+$('.bookmark-list').on('click', '.isCompleted', markCompleted);
+
+function markCompleted(event){
+	($(this).closest('.idea-article')).toggleClass('completed');
+	($(this).closest('.idea-article').find('.idea-title')).toggleClass('completed');
+	($(this).closest('.idea-article').find('.idea-paragraph')).toggleClass('completed');
+	var storedObj = JSON.parse(localStorage.getItem(($(this).closest('.idea-article')).attr('id')));
+	storedObj.completed = ($(this).closest('.idea-article')).hasClass('completed');
+	localStorage.setItem(($(this).closest('.idea-article')).attr('id'),JSON.stringify(storedObj));
 }
 
 $('.search-box').on('keyup', realtimeSearch)
