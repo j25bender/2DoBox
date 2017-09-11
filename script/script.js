@@ -282,5 +282,27 @@ function filterIdeas(e){
 			($($('article')[i])).hide();
 		}
 	}
+	checkFilters(e);
+}
+
+function checkFilters(e){
 	($(e.target)).toggleClass('active-filter');
+	if(($('.active-filter').length)===2){
+		removeAllFilters();
+		($(e.target)).toggleClass('active-filter');
+	}else if (($('.active-filter').length)===0){
+		showAllArticles();
+	}
+}
+
+function showAllArticles(){
+	for (var i = 0 ; i < $('article').length ; i++){
+		($($('article')[i])).show();
+	}
+}
+
+function removeAllFilters(){
+	for (var i = 0 ; i < $('li').length ; i++){
+		($($('li')[i])).removeClass('active-filter');
+	}
 }
