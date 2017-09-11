@@ -234,6 +234,10 @@ li.active-filter{
 	text-decoration: line-through;
 }
 
+p.completed{
+	text-decoration: line-through;
+}
+
 hr{
 	border: 1px solid #D1D3D4;
 	margin-top: 20px;
