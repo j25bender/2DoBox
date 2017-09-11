@@ -56,12 +56,13 @@ function enabledBtn(){
     }
 }
 
-function Idea(title, body, status ) {
+function Idea(title, body, status, dueDate) {
 	this.title = title;
 	this.body = body; 
 	this.status = 'Normal'; 
 	this.id = Date.now();
 	this.completed = false;
+	this.dueDate = dueDate;
 }
 
 $('#submit-button').on('click', addIdea);
@@ -74,7 +75,9 @@ function addIdea(e){
 	var title = $('.main-title').val();
 	var body = $('.idea-input').val();
 	var status = 'Normal';
-	var anotherIdea = new Idea(title, body, status);
+	var getDueDate = $('input[type="date"]');
+	var dueDate = getDueDate.val();
+	var anotherIdea = new Idea(title, body, status, dueDate);
 	prependIdea(anotherIdea);
 	storeIdea(anotherIdea.id, anotherIdea);
 	$('.main-title').focus();
@@ -90,7 +93,8 @@ function prependIdea(idea){
 		<div class="quality-rank"> 
 			<div class="icon-buttons upvote-button"></div>
 			<div class="icon-buttons downvote-button"></div>
-			<p class="importance"> importance: <span class = "quality-content">${idea.status}</span> </p> 
+			<p class="importance"> importance: <span class = "quality-content">${idea.status}</span> </p>
+			<p contenteditable="true" id="due-date">${idea.dueDate}</p>
 		</div> 
 		<button class="isCompleted"> Completed </button>
 	</div>
@@ -98,6 +102,7 @@ function prependIdea(idea){
 </article>`)
 	$('.main-title').val("");
 	$('.idea-input').val("");
+	$('input[type="date"]').val('');
 }
 
 function prependCompleted(idea){
@@ -135,9 +140,33 @@ function returnBtnCheckValue(e){
 		addIdea();
 	}
 	charCounter(e);
+	formatNowDate();
+	nowDateCompareDueDate(e);
 }
 
-//Future home of autocomplete function...
+function formatNowDate(currentDate){
+	var newDate = new Date();
+	var year = newDate.getFullYear();
+	var month = newDate.getMonth() + 1;
+	var day = newDate.getDate();
+	var formatedDate = year + '-' + month + '-' + day;
+	console.log(formatedDate)
+	return formatedDate;
+}
+
+function nowDateCompareDueDate(e){
+	// var something = formatNowDate(somethingelse);
+	//You can surprisingly use > < = on Date https://stackoverflow.com/questions/492994/compare-two-dates-with-javascript
+	for (var i = 0 ; i < $('article').length; i++){
+		if ($($('article')[i]).find('#due-date').text() > '2017-09-20'){
+			// formatNowDate()
+			// ($($('article')[i])).show();
+		}
+		else{
+			// ($($('article')[i])).hide();
+		}
+	}
+}
 
 function charCounter(e){
 	var bodyInput = $('#body-input').val();
