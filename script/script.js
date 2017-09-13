@@ -93,8 +93,7 @@ function addIdea(e){
 $('.bookmark-list').on('click', '.upvote-button', thisOne);
 function thisOne(){
 	var currentId = ($(this).closest('.idea-article').attr('id'));
-	var currentDueDate = ($(this).parent().find('.due-content').text().slice(0, -5));
-	// currentDueDate.slice(0, -5);
+	var currentDueDate = ($(this).parent().find('.due-content').text());
 
 	console.log(currentDueDate)
 	var date1 = new Date();
@@ -103,31 +102,9 @@ function thisOne(){
 	console.log(date2)
 	if(date1.getTime() <= date2.getTime()){
   	console.log("Over due");
-}
-	// var newQuality = retrieveQuality(qualityValue);
-	// ($(this).parent().find('.quality-content').text(newQuality));
-	// resetCard(newQuality,currentId);
-}
-// 	var date1=new Date();
-// 	var date2=new Date("2013-02-18");
-
+	}
 	
-
-
-// function formatNowDate(){
-// 	var newDate = new Date();
-// 	var year = newDate.getFullYear();
-// 	var month = newDate.getMonth() + 1;
-// 	var day = newDate.getDate();
-// 	var time = newDate.getTime();
-// 	console.log(time)
-// 	var dueArr = [];
-
-// 	dueArr.push(month.val(), day.val(), year.val(), $('.time').val());
-// 	console.log(dueArr)
-// 	console.log(formatedDate);
-// 	return formatedDate;
-// }
+}
 
 function prependIdea(idea){
 	$('.bookmark-list').prepend(
