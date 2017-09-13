@@ -100,7 +100,7 @@ function prependIdea(idea){
 			<div class="icon-buttons upvote-button"></div>
 			<div class="icon-buttons downvote-button"></div>
 			<p class="importance"> Importance: <span class="quality-content">${idea.status}</span> </p><br />
-			<p contenteditable="true" class="due-date">Due Date:<span class="due-content">${idea.dueDate}</span></p>
+			<p class="due-date">Due Date:<span contenteditable="true" class="due-content">${idea.dueDate}</span></p>
 		</div> 
 		<button class="isCompleted"> Completed </button>
 	</div>
@@ -122,7 +122,7 @@ function prependCompleted(idea){
 			<div class="icon-buttons upvote-button"></div>
 			<div class="icon-buttons downvote-button"></div>
 			<p class="importance completed"> Importance: <span class="quality-content">${idea.status}</span></p>
-			<p contenteditable="true" class="due-date">Due Date:<span class="due-content">${idea.dueDate}</span></p>
+			<p class="due-date">Due Date:<span contenteditable="true" class="due-content">${idea.dueDate}</span></p>
 		</div> 
 		<button class="isCompleted"> Completed </button>
 	</div>
