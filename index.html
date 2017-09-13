@@ -23,25 +23,25 @@
 				<textarea id="body-input" class="idea-input input" placeholder="Task" spellcheck="true"></textarea>
 				<p><span id="body-char-count">120</span></p>
 			</label>
-		<div class="date-select">
-			<select class="due-date month">
-				<option value="1">January</option>
-				<option value="2">February</option>
-				<option value="3">March</option>
-				<option value="4">April</option>
-				<option value="5">May</option>
-				<option value="6">June</option>
-				<option value="7">July</option>
-				<option value="8">August</option>
-				<option value="9" selected>September</option>
-				<option value="10">October</option>
-				<option value="11">November</option>
-				<option value="12">December</option>
-			</select>
-			
-			<select class="due-date day"></select>
-			<select class="due-date year"></select>
-		</div>
+			<div class="date-select">
+				<select class="due-date month">
+					<option value="1">January</option>
+					<option value="2">February</option>
+					<option value="3">March</option>
+					<option value="4">April</option>
+					<option value="5">May</option>
+					<option value="6">June</option>
+					<option value="7">July</option>
+					<option value="8">August</option>
+					<option value="9" selected>September</option>
+					<option value="10">October</option>
+					<option value="11">November</option>
+					<option value="12">December</option>
+				</select>
+				<select class="due-date day"></select>
+				<select class="due-date year"></select>
+			</div>
+
 			<label for="submit-button">
 				<input id="submit-button" class="button enterButton" type="button" value="save" disabled="true">
 			</label>
@@ -53,7 +53,8 @@
 			<input id ="search-input" class="search-box input" type="text" placeholder ="Filter">
 		</label>
 		<button class="restore-completed"> Show Completed TODOs </button>
-		<ul class=filter> Importance:<li class="1"> 1-<span class="filter-accent">Critical </li> <li class="2"> 2-<span class="filter-accent">High </li> <li class="3"> 3-<span class="filter-accent">Normal </li> <li class="4"> 4-<span class="filter-accent">Low </li> <li class="5"> 5-<span class="filter-accent">None </li> </ul>
+		<ul class=filter> Importance:<li class="1"> 1-<span class="filter-accent">Critical </li><li class="2"> 2-<span class="filter-accent">High </li> <li class="3"> 3-<span class="filter-accent">Normal </li> <li class="spacer1"></li><li class="4"> 4-<span class="filter-accent">Low </li> <li class="spacer2"></li> <li class="5"> 5-<span class="filter-accent">None </li> <li class="spacer3"></li></ul>
+		
 		<section class="bookmark-list">
 		</section>
 		<button class="show-more button"> Show More TODOs... </button>
