@@ -118,9 +118,12 @@ function prependIdea(idea){
 	<div class="quality-completed">
 		<div class="quality-rank"> 
 			<div class="icon-buttons upvote-button"></div>
-				<div class="icon-buttons downvote-button"></div>
-				<p class="importance"> Importance: <span class="quality-content">${idea.status}</span> </p><br /> </div>
-			<div><p class="task-due-date">Due Date:<span contenteditable="true" class="due-content">${idea.dueDate}</span></p></div>
+			<div class="icon-buttons downvote-button"></div>
+			<p class="importance"><span class="quality-content">${idea.status}</span> </p><br /> 
+		</div>
+			<div>
+				<p class="task-due-date">Due Date:<span contenteditable="true" class="due-content">${idea.dueDate}</span></p>
+			</div>
 		<button class="isCompleted"> Completed </button>
 	</div>
 	<hr/> 
@@ -141,7 +144,7 @@ function prependOverdue(idea){
 		<div class="quality-rank"> 
 			<div class="icon-buttons upvote-button"></div>
 				<div class="icon-buttons downvote-button"></div>
-				<p class="importance"> Importance: <span class="quality-content">${idea.status}</span> </p><br /> </div>
+				<p class="importance"><span class="quality-content">${idea.status}</span> </p><br /> </div>
 			<div><p class="task-due-date">Due Date:<span contenteditable="true" class="due-content">${idea.dueDate}</span></p></div>
 		<button class="isCompleted"> Completed </button>
 	</div>
@@ -163,7 +166,7 @@ function prependCompleted(idea){
 		<div class="quality-rank"> 
 			<div class="icon-buttons upvote-button"></div>
 				<div class="icon-buttons downvote-button"></div>
-				<p class="importance completed"> Importance: <span class="quality-content">${idea.status}</span> </p><br /> </div>
+				<p class="importance completed"><span class="quality-content">${idea.status}</span> </p><br /> </div>
 			<div><p class="task-due-date">Due Date:<span contenteditable="true" class="due-content">${idea.dueDate}</span></p></div>
 		<button class="isCompleted"> Completed </button>
 	</div>
@@ -185,7 +188,7 @@ function prependCompletedOverdue(idea){
 		<div class="quality-rank"> 
 			<div class="icon-buttons upvote-button"></div>
 				<div class="icon-buttons downvote-button"></div>
-				<p class="importance completed"> Importance: <span class="quality-content">${idea.status}</span> </p><br /> </div>
+				<p class="importance completed"><span class="quality-content">${idea.status}</span> </p><br /> </div>
 			<div><p class="task-due-date">Due Date:<span contenteditable="true" class="due-content">${idea.dueDate}</span></p></div>
 		<button class="isCompleted"> Completed </button>
 	</div>
