@@ -160,7 +160,7 @@ button.restore-completed:disabled{
 }
 
 .task-due-date{
-	margin-left: 140px;
+	justify-content: space-between;
 }
 
 .due-content{

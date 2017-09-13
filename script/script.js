@@ -1,7 +1,5 @@
 $(document).ready(onLoad);
-// getStoredCards()
 
-//TL: made on page-load function non-anonymous.
 function onLoad(){
 	cardRestore();
 	completedDisable();
@@ -74,11 +72,7 @@ function Idea(title, body, status, dueDate) {
 Idea.prototype.isOverDue = function(dueDate) {
 	var nowDate = new Date();
 	var thisDueDate = new Date(dueDate);
-	console.log(nowDate)
-	console.log(thisDueDate)
 	if(nowDate.getTime() >= thisDueDate.getTime()){
-		console.log(nowDate.getTime())
-		console.log(thisDueDate.getTime())
 		this.overdue = true;
 	}
 };
@@ -104,32 +98,8 @@ function addIdea(e){
 	unhideShowMore();
 	storeIdea(anotherIdea.id, anotherIdea);
 	showArticles(10);
-	isOverDue();
 	$('.main-title').focus();
 }
-
-$('.bookmark-list').on('click', '.upvote-button', isOverDue);
-function isOverDue(){
-	// var currentId = ($(this).closest('.idea-article').attr('id'));
-	var currentDueDate = ($(this).parent().find('.due-content').text());
-	// currentDueDate.slice(0, -5);
-
-	// console.log(currentDueDate)
-	var nowDate = new Date();
-	var dueDate = new Date(currentDueDate);
-	// console.log(nowDate)
-	// console.log(dueDate)
-	$('.idea-article').each(function(){
-	if(nowDate.getTime() >= dueDate.getTime()){
-            $('.this').addClass('over-display-none');
-  			// console.log("Over due");
-        } else {
-  			$('.this').removeClass('overdue-display-none');
-        }
-	})
-}
-
-
 
 function prependIdea(idea){
 	$('.bookmark-list').prepend(
@@ -143,7 +113,7 @@ function prependIdea(idea){
 			<div class="icon-buttons upvote-button"></div>
 			<div class="icon-buttons downvote-button"></div>
 			<p class="importance"> Importance: <span class="quality-content">${idea.status}</span> </p><br />
-			<p class="task-due-date">Due Date:<span contenteditable="true" class="due-content">${idea.dueDate}</span></p>
+			<div><p class="task-due-date">Due Date:<span contenteditable="true" class="due-content">${idea.dueDate}</span></p></div>
 		</div> 
 		<button class="isCompleted"> Completed </button>
 	</div>
@@ -166,7 +136,7 @@ function prependOverdue(idea){
 			<div class="icon-buttons upvote-button"></div>
 			<div class="icon-buttons downvote-button"></div>
 			<p class="importance"> Importance: <span class="quality-content">${idea.status}</span> </p><br />
-			<p class="task-due-date">Due Date:<span contenteditable="true" class="due-content">${idea.dueDate}</span></p>
+			<div><p class="task-due-date">Due Date:<span contenteditable="true" class="due-content">${idea.dueDate}</span></p></div>
 		</div> 
 		<button class="isCompleted"> Completed </button>
 	</div>
@@ -189,7 +159,7 @@ function prependCompleted(idea){
 			<div class="icon-buttons upvote-button"></div>
 			<div class="icon-buttons downvote-button"></div>
 			<p class="importance completed"> Importance: <span class="quality-content">${idea.status}</span></p>
-			<p class="task-due-date">Due Date:<span contenteditable="true" class="due-content">${idea.dueDate}</span></p>
+			<div><p class="task-due-date">Due Date:<span contenteditable="true" class="due-content">${idea.dueDate}</span></p></div>
 		</div> 
 		<button class="isCompleted"> Completed </button>
 	</div>
@@ -424,14 +394,11 @@ function showArticles(n){
 		for (var i = 0 ; i < artLength ; i++){
 			if (i < n){
 				$($('article')[i]).show();
-				// console.log('first ten');
 			}else{
 				$($('article')[i]).hide();	
-				// console.log('rest');	
 			}
 		}
 	showMoreDisable(10);
-	// console.log('showten function');
 }
 
 function unhideShowMore(){
@@ -443,7 +410,6 @@ function unhideShowMore(){
 function showMore(){
 	var showHowMany = $('article:visible').length;
 	showHowMany += 10;
-	console.log(showHowMany);
 	showArticles(showHowMany);
 	showMoreDisable(showHowMany);
 }
