@@ -87,6 +87,7 @@ span#body-char-count{
 	font-size: 35px;
 }
 
+
 /*Main Container*/
 .container{
 	text-align: center;
@@ -95,6 +96,18 @@ span#body-char-count{
 
 span.filtering{
 	display: block;
+}
+
+.idea-title{
+	display: inline-block;
+}
+
+.overdue{
+	color: #CC3300;
+	display: inline-block;
+}
+.overdue-display-none{
+	display: none;
 }
 
 .icon{
@@ -144,6 +157,14 @@ button.restore-completed:hover{
 
 button.restore-completed:disabled{
 	background-color: #F9F1EF;
+}
+
+.task-due-date{
+	justify-content: space-between;
+}
+
+.due-content{
+	margin-left: 5px;
 }
 
 /*Importance Buttons*/

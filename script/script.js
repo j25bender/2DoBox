@@ -1,13 +1,13 @@
 $(document).ready(onLoad);
-// getStoredCards()
 
-//TL: made on page-load function non-anonymous.
 function onLoad(){
 	cardRestore();
 	completedDisable();
 	unhideShowMore();
 	showArticles(10);
 	showMoreDisable(10);
+	dayDue();
+	yearDue();
 	$('#title-input').focus();
 }
 
@@ -59,13 +59,23 @@ function enabledBtn(){
     }
 }
 
-function Idea(title, body, status ) {
+function Idea(title, body, status, dueDate) {
 	this.title = title;
 	this.body = body; 
 	this.status = 'Normal'; 
 	this.id = Date.now();
 	this.completed = false;
+	this.dueDate = dueDate;
+	this.overdue = false;
 }
+
+Idea.prototype.isOverDue = function(dueDate) {
+	var nowDate = new Date();
+	var thisDueDate = new Date(dueDate);
+	if(nowDate.getTime() >= thisDueDate.getTime()){
+		this.overdue = true;
+	}
+};
 
 $('#submit-button').on('click', addIdea);
 
@@ -77,8 +87,14 @@ function addIdea(e){
 	var title = $('.main-title').val();
 	var body = $('.idea-input').val();
 	var status = 'Normal';
-	var anotherIdea = new Idea(title, body, status);
-	prependIdea(anotherIdea);
+	var dueDate = $('.month').val() +'-'+ $('.day').val() +'-'+ $('.year').val();
+	var anotherIdea = new Idea(title, body, status, dueDate);
+	anotherIdea.isOverDue(dueDate);
+	if (anotherIdea.overdue === false){
+		prependIdea(anotherIdea);
+	}else{
+		prependOverdue(anotherIdea);
+	}
 	unhideShowMore();
 	storeIdea(anotherIdea.id, anotherIdea);
 	showArticles(10);
@@ -88,14 +104,16 @@ function addIdea(e){
 function prependIdea(idea){
 	$('.bookmark-list').prepend(
 		`<article id=${idea.id} class="idea-article">
-			<h2 class="idea-title" contenteditable=true >${idea.title}</h2> 
+			<h2 class="idea-title" contenteditable=true >${idea.title}</h2>
+			<h2 class="overdue overdue-display-none">OVERDUE</h2>
 			<div class="icon-buttons delete-button right"></div>
 			<p contenteditable="true" class="idea-paragraph">${idea.body}</p>
 	<div class="quality-completed">
 		<div class="quality-rank"> 
 			<div class="icon-buttons upvote-button"></div>
 			<div class="icon-buttons downvote-button"></div>
-			<p class="importance"> importance: <span class = "quality-content">${idea.status}</span> </p> 
+			<p class="importance"> Importance: <span class="quality-content">${idea.status}</span> </p><br />
+			<div><p class="task-due-date">Due Date:<span contenteditable="true" class="due-content">${idea.dueDate}</span></p></div>
 		</div> 
 		<button class="isCompleted"> Completed </button>
 	</div>
@@ -103,19 +121,45 @@ function prependIdea(idea){
 </article>`)
 	$('.main-title').val("");
 	$('.idea-input').val("");
+	$('input[type="date"]').val('');
+}
+
+function prependOverdue(idea){
+	$('.bookmark-list').prepend(
+		`<article id=${idea.id} class="idea-article">
+			<h2 class="idea-title" contenteditable=true >${idea.title}</h2>
+			<h2 class="overdue">OVERDUE</h2>
+			<div class="icon-buttons delete-button right"></div>
+			<p contenteditable="true" class="idea-paragraph">${idea.body}</p>
+	<div class="quality-completed">
+		<div class="quality-rank"> 
+			<div class="icon-buttons upvote-button"></div>
+			<div class="icon-buttons downvote-button"></div>
+			<p class="importance"> Importance: <span class="quality-content">${idea.status}</span> </p><br />
+			<div><p class="task-due-date">Due Date:<span contenteditable="true" class="due-content">${idea.dueDate}</span></p></div>
+		</div> 
+		<button class="isCompleted"> Completed </button>
+	</div>
+		<hr/> 
+</article>`)
+	$('.main-title').val("");
+	$('.idea-input').val("");
+	$('input[type="date"]').val('');
 }
 
 function prependCompleted(idea){
 	$('.bookmark-list').prepend(
 		`<article id=${idea.id} class="idea-article completed">
-			<h2 class="idea-title completed" contenteditable=true >${idea.title}</h2> 
+			<h2 class="idea-title completed" contenteditable=true >${idea.title}</h2>
+			<h2 class="overdue">OVERDUE</h2>
 			<div class="icon-buttons delete-button right"></div>
 			<p contenteditable="true" class="idea-paragraph completed">${idea.body}</p>
 	<div class="quality-completed">
 		<div class="quality-rank"> 
 			<div class="icon-buttons upvote-button"></div>
 			<div class="icon-buttons downvote-button"></div>
-			<p class="importance completed"> importance: <span class = "quality-content">${idea.status}</span> </p> 
+			<p class="importance completed"> Importance: <span class="quality-content">${idea.status}</span></p>
+			<div><p class="task-due-date">Due Date:<span contenteditable="true" class="due-content">${idea.dueDate}</span></p></div>
 		</div> 
 		<button class="isCompleted"> Completed </button>
 	</div>
@@ -123,6 +167,7 @@ function prependCompleted(idea){
 </article>`)
 	$('.main-title').val("");
 	$('.idea-input').val("");
+	$('input[type="date"]').val('');
 }
 
 $('.bookmark-list').on('click', '.delete-button', removeThis);
@@ -143,9 +188,22 @@ function returnBtnCheckValue(e){
 	}
 	unhideShowMore();
 	charCounter(e);
+	// formatNowDate();
 }
 
-//Future home of autocomplete function...
+function dayDue(){
+	var $selectDay = $('.day');
+    for (var i = 1 ; i <= 31 ; i++){
+        $selectDay.append($('<option></option>').val(i).html(i));
+    }
+}
+
+function yearDue(){
+	var $selectYear = $('.year');
+	for (var i = 2017 ; i <= 2117 ; i++){
+		$selectYear.append($('<option></option>').val(i).html(i));
+	}
+}
 
 function charCounter(e){
 	var bodyInput = $('#body-input').val();
@@ -236,6 +294,19 @@ function editBody(event){
 	localStorage.setItem(id, JSON.stringify(uniqueCard));
 }
 
+$('.bookmark-list').on('keyup', '.due-date', editDueDate);
+
+function editDueDate(event){
+	var id = ($(this).closest('.idea-article').attr('id'));
+	var uniqueCard = JSON.parse(localStorage.getItem(id));
+	if (event.keyCode === 13) {
+		event.preventDefault();
+		this.blur();
+	}
+	uniqueCard.dueDate = $(this).text();
+	localStorage.setItem(id, JSON.stringify(uniqueCard));
+}
+
 $('.bookmark-list').on('click', '.isCompleted', markCompleted);
 
 function markCompleted(event){
@@ -323,14 +394,11 @@ function showArticles(n){
 		for (var i = 0 ; i < artLength ; i++){
 			if (i < n){
 				$($('article')[i]).show();
-				console.log('first ten');
 			}else{
 				$($('article')[i]).hide();	
-				console.log('rest');	
 			}
 		}
 	showMoreDisable(10);
-	console.log('showten function');
 }
 
 function unhideShowMore(){
@@ -342,7 +410,6 @@ function unhideShowMore(){
 function showMore(){
 	var showHowMany = $('article:visible').length;
 	showHowMany += 10;
-	console.log(showHowMany);
 	showArticles(showHowMany);
 	showMoreDisable(showHowMany);
 }
