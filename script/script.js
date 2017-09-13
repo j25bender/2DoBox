@@ -86,8 +86,48 @@ function addIdea(e){
 	unhideShowMore();
 	storeIdea(anotherIdea.id, anotherIdea);
 	showArticles(10);
+	thisOne();
 	$('.main-title').focus();
 }
+
+$('.bookmark-list').on('click', '.upvote-button', thisOne);
+function thisOne(){
+	var currentId = ($(this).closest('.idea-article').attr('id'));
+	var currentDueDate = ($(this).parent().find('.due-content').text().slice(0, -5));
+	// currentDueDate.slice(0, -5);
+
+	console.log(currentDueDate)
+	var date1 = new Date();
+	var date2 = new Date(currentDueDate);
+	console.log(date1)
+	console.log(date2)
+	if(date1.getTime() <= date2.getTime()){
+  	console.log("Over due");
+}
+	// var newQuality = retrieveQuality(qualityValue);
+	// ($(this).parent().find('.quality-content').text(newQuality));
+	// resetCard(newQuality,currentId);
+}
+// 	var date1=new Date();
+// 	var date2=new Date("2013-02-18");
+
+	
+
+
+// function formatNowDate(){
+// 	var newDate = new Date();
+// 	var year = newDate.getFullYear();
+// 	var month = newDate.getMonth() + 1;
+// 	var day = newDate.getDate();
+// 	var time = newDate.getTime();
+// 	console.log(time)
+// 	var dueArr = [];
+
+// 	dueArr.push(month.val(), day.val(), year.val(), $('.time').val());
+// 	console.log(dueArr)
+// 	console.log(formatedDate);
+// 	return formatedDate;
+// }
 
 function prependIdea(idea){
 	$('.bookmark-list').prepend(
@@ -100,7 +140,7 @@ function prependIdea(idea){
 			<div class="icon-buttons upvote-button"></div>
 			<div class="icon-buttons downvote-button"></div>
 			<p class="importance"> Importance: <span class="quality-content">${idea.status}</span> </p><br />
-			<p class="due-date">Due Date:<span contenteditable="true" class="due-content">${idea.dueDate}</span></p>
+			<p class="task-due-date">Due Date:<span contenteditable="true" class="due-content">${idea.dueDate}</span></p>
 		</div> 
 		<button class="isCompleted"> Completed </button>
 	</div>
@@ -122,7 +162,7 @@ function prependCompleted(idea){
 			<div class="icon-buttons upvote-button"></div>
 			<div class="icon-buttons downvote-button"></div>
 			<p class="importance completed"> Importance: <span class="quality-content">${idea.status}</span></p>
-			<p class="due-date">Due Date:<span contenteditable="true" class="due-content">${idea.dueDate}</span></p>
+			<p class="task-due-date">Due Date:<span contenteditable="true" class="due-content">${idea.dueDate}</span></p>
 		</div> 
 		<button class="isCompleted"> Completed </button>
 	</div>
@@ -152,16 +192,6 @@ function returnBtnCheckValue(e){
 	unhideShowMore();
 	charCounter(e);
 	// formatNowDate();
-}
-
-function formatNowDate(){
-	var newDate = new Date();
-	var year = newDate.getFullYear();
-	var month = newDate.getMonth() + 1;
-	var day = newDate.getDate();
-	var formatedDate = year + '-' + month + '-' + day;
-	console.log(formatedDate);
-	return formatedDate;
 }
 
 function dayDue(){
