@@ -206,6 +206,10 @@ li.active-filter{
 	margin-right: 15px;
 }
 
+div.date-select{
+	margin-top: -30px;
+}
+
 .delete-button{
 	
 	background:url('../images/delete.svg');
@@ -238,6 +242,10 @@ li.active-filter{
 .quality-completed{
 	display: flex;
 	justify-content: space-between;
+}
+
+button.isCompleted{
+	
 }
 
 .quality-rank{
