@@ -8,6 +8,8 @@ function onLoad(){
 	unhideShowMore();
 	showArticles(10);
 	showMoreDisable(10);
+	dayDue();
+	yearDue();
 	$('#title-input').focus();
 }
 
@@ -78,8 +80,7 @@ function addIdea(e){
 	var title = $('.main-title').val();
 	var body = $('.idea-input').val();
 	var status = 'Normal';
-	var getDueDate = $('input[type="date"]');
-	var dueDate = getDueDate.val();
+	var dueDate = $('.month').val() +'-'+ $('.day').val() +'-'+ $('.year').val() +' '+ $('.time').val();
 	var anotherIdea = new Idea(title, body, status, dueDate);
 	prependIdea(anotherIdea);
 	unhideShowMore();
@@ -98,8 +99,8 @@ function prependIdea(idea){
 		<div class="quality-rank"> 
 			<div class="icon-buttons upvote-button"></div>
 			<div class="icon-buttons downvote-button"></div>
-			<p class="importance"> importance: <span class = "quality-content">${idea.status}</span> </p>
-			<p contenteditable="true" id="due-date">${idea.dueDate}</p>
+			<p class="importance"> Importance: <span class="quality-content">${idea.status}</span> </p><br />
+			<p contenteditable="true" class="due-date">Due Date:<span class="due-content">${idea.dueDate}</span></p>
 		</div> 
 		<button class="isCompleted"> Completed </button>
 	</div>
@@ -120,7 +121,8 @@ function prependCompleted(idea){
 		<div class="quality-rank"> 
 			<div class="icon-buttons upvote-button"></div>
 			<div class="icon-buttons downvote-button"></div>
-			<p class="importance completed"> importance: <span class = "quality-content">${idea.status}</span> </p> 
+			<p class="importance completed"> Importance: <span class="quality-content">${idea.status}</span></p>
+			<p contenteditable="true" class="due-date">Due Date:<span class="due-content">${idea.dueDate}</span></p>
 		</div> 
 		<button class="isCompleted"> Completed </button>
 	</div>
@@ -128,6 +130,7 @@ function prependCompleted(idea){
 </article>`)
 	$('.main-title').val("");
 	$('.idea-input').val("");
+	$('input[type="date"]').val('');
 }
 
 $('.bookmark-list').on('click', '.delete-button', removeThis);
@@ -148,31 +151,30 @@ function returnBtnCheckValue(e){
 	}
 	unhideShowMore();
 	charCounter(e);
-	formatNowDate();
-	nowDateCompareDueDate(e);
+	// formatNowDate();
 }
 
-function formatNowDate(currentDate){
+function formatNowDate(){
 	var newDate = new Date();
 	var year = newDate.getFullYear();
 	var month = newDate.getMonth() + 1;
 	var day = newDate.getDate();
 	var formatedDate = year + '-' + month + '-' + day;
-	console.log(formatedDate)
+	console.log(formatedDate);
 	return formatedDate;
 }
 
-function nowDateCompareDueDate(e){
-	// var something = formatNowDate(somethingelse);
-	//You can surprisingly use > < = on Date https://stackoverflow.com/questions/492994/compare-two-dates-with-javascript
-	for (var i = 0 ; i < $('article').length; i++){
-		if ($($('article')[i]).find('#due-date').text() > '2017-09-20'){
-			// formatNowDate()
-			// ($($('article')[i])).show();
-		}
-		else{
-			// ($($('article')[i])).hide();
-		}
+function dayDue(){
+	var $selectDay = $('.day');
+    for (var i = 1 ; i <= 31 ; i++){
+        $selectDay.append($('<option></option>').val(i).html(i));
+    }
+}
+
+function yearDue(){
+	var $selectYear = $('.year');
+	for (var i = 2017 ; i <= 2117 ; i++){
+		$selectYear.append($('<option></option>').val(i).html(i));
 	}
 }
 
@@ -262,6 +264,19 @@ function editBody(event){
 		this.blur();
 	}
 	uniqueCard.body = $(this).text();
+	localStorage.setItem(id, JSON.stringify(uniqueCard));
+}
+
+$('.bookmark-list').on('keyup', '.due-date', editDueDate);
+
+function editDueDate(event){
+	var id = ($(this).closest('.idea-article').attr('id'));
+	var uniqueCard = JSON.parse(localStorage.getItem(id));
+	if (event.keyCode === 13) {
+		event.preventDefault();
+		this.blur();
+	}
+	uniqueCard.dueDate = $(this).text();
 	localStorage.setItem(id, JSON.stringify(uniqueCard));
 }
 

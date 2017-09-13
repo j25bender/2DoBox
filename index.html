@@ -14,22 +14,40 @@
 	<body>
 	<header>
 		<h1><span class="accent-color">2do</span>box</h1>
-		<label for="title-input">
-			<input id="title-input" class="main-title input" type="text" placeholder="Title" spellcheck="true"></input>
-		</label> 
+		<form>
+			<label for="title-input">
+				<input id="title-input" class="main-title input" type="text" placeholder="Title" spellcheck="true"></input>
+			</label>
 
-		<label for="body-input">
-			<textarea id="body-input" class="idea-input input" placeholder="Task" spellcheck="true"></textarea>
-			<p><span id="body-char-count">120</span></p>
-		</label>
+			<label for="body-input">
+				<textarea id="body-input" class="idea-input input" placeholder="Task" spellcheck="true"></textarea>
+				<p><span id="body-char-count">120</span></p>
+			</label>
 		
-		<label for="due-date">
-			<p class="text-due-date">Due Date:	<input type="date" name="due-date" id="due-date todays-date" min="2017-09-09"></p>
-		</label>
+			<select class="due-date month">
+				<option value="1">January</option>
+				<option value="2">February</option>
+				<option value="3">March</option>
+				<option value="4">April</option>
+				<option value="5">May</option>
+				<option value="6">June</option>
+				<option value="7">July</option>
+				<option value="8">August</option>
+				<option value="9" selected>September</option>
+				<option value="10">October</option>
+				<option value="11">November</option>
+				<option value="12">December</option>
+			</select>
 
-		<label for="submit-button">
-			<input id="submit-button" class="button enterButton" type="button" value="save" disabled="true">
-		</label>
+			<select class="due-date day"></select>
+			<select class="due-date year"></select>
+			<input type="time" name="time" class="due-date time">
+			<input type="hidden" id="timezone" name="timezone" value="-12:00">
+
+			<label for="submit-button">
+				<input id="submit-button" class="button enterButton" type="button" value="save" disabled="true">
+			</label>
+		</form>
 	</header>
 
 	<main class="container">

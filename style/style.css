@@ -87,6 +87,7 @@ span#body-char-count{
 	font-size: 35px;
 }
 
+
 /*Main Container*/
 .container{
 	text-align: center;
@@ -144,6 +145,14 @@ button.restore-completed:hover{
 
 button.restore-completed:disabled{
 	background-color: #F9F1EF;
+}
+
+.due-date{
+	margin-left: 140px;
+}
+
+.due-content{
+	margin-left: 5px;
 }
 
 /*Importance Buttons*/
