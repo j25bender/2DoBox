@@ -68,7 +68,20 @@ function Idea(title, body, status, dueDate) {
 	this.id = Date.now();
 	this.completed = false;
 	this.dueDate = dueDate;
+	this.overdue = false;
 }
+
+Idea.prototype.isOverDue = function(dueDate) {
+	var nowDate = new Date();
+	var thisDueDate = new Date(dueDate);
+	console.log(nowDate)
+	console.log(thisDueDate)
+	if(nowDate.getTime() >= thisDueDate.getTime()){
+		console.log(nowDate.getTime())
+		console.log(thisDueDate.getTime())
+		this.overdue = true;
+	}
+};
 
 $('#submit-button').on('click', addIdea);
 
@@ -80,36 +93,72 @@ function addIdea(e){
 	var title = $('.main-title').val();
 	var body = $('.idea-input').val();
 	var status = 'Normal';
-	var dueDate = $('.month').val() +'-'+ $('.day').val() +'-'+ $('.year').val() +' '+ $('.time').val();
+	var dueDate = $('.month').val() +'-'+ $('.day').val() +'-'+ $('.year').val();
 	var anotherIdea = new Idea(title, body, status, dueDate);
-	prependIdea(anotherIdea);
+	anotherIdea.isOverDue(dueDate);
+	if (anotherIdea.overdue === false){
+		prependIdea(anotherIdea);
+	}else{
+		prependOverdue(anotherIdea);
+	}
 	unhideShowMore();
 	storeIdea(anotherIdea.id, anotherIdea);
 	showArticles(10);
-	thisOne();
+	isOverDue();
 	$('.main-title').focus();
 }
 
-$('.bookmark-list').on('click', '.upvote-button', thisOne);
-function thisOne(){
-	var currentId = ($(this).closest('.idea-article').attr('id'));
+$('.bookmark-list').on('click', '.upvote-button', isOverDue);
+function isOverDue(){
+	// var currentId = ($(this).closest('.idea-article').attr('id'));
 	var currentDueDate = ($(this).parent().find('.due-content').text());
+	// currentDueDate.slice(0, -5);
 
-	console.log(currentDueDate)
-	var date1 = new Date();
-	var date2 = new Date(currentDueDate);
-	console.log(date1)
-	console.log(date2)
-	if(date1.getTime() <= date2.getTime()){
-  	console.log("Over due");
-	}
-	
+	// console.log(currentDueDate)
+	var nowDate = new Date();
+	var dueDate = new Date(currentDueDate);
+	// console.log(nowDate)
+	// console.log(dueDate)
+	$('.idea-article').each(function(){
+	if(nowDate.getTime() >= dueDate.getTime()){
+            $('.this').addClass('over-display-none');
+  			// console.log("Over due");
+        } else {
+  			$('.this').removeClass('overdue-display-none');
+        }
+	})
 }
+
+
 
 function prependIdea(idea){
 	$('.bookmark-list').prepend(
 		`<article id=${idea.id} class="idea-article">
-			<h2 class="idea-title" contenteditable=true >${idea.title}</h2> 
+			<h2 class="idea-title" contenteditable=true >${idea.title}</h2>
+			<h2 class="overdue overdue-display-none">OVERDUE</h2>
+			<div class="icon-buttons delete-button right"></div>
+			<p contenteditable="true" class="idea-paragraph">${idea.body}</p>
+	<div class="quality-completed">
+		<div class="quality-rank"> 
+			<div class="icon-buttons upvote-button"></div>
+			<div class="icon-buttons downvote-button"></div>
+			<p class="importance"> Importance: <span class="quality-content">${idea.status}</span> </p><br />
+			<p class="task-due-date">Due Date:<span contenteditable="true" class="due-content">${idea.dueDate}</span></p>
+		</div> 
+		<button class="isCompleted"> Completed </button>
+	</div>
+		<hr/> 
+</article>`)
+	$('.main-title').val("");
+	$('.idea-input').val("");
+	$('input[type="date"]').val('');
+}
+
+function prependOverdue(idea){
+	$('.bookmark-list').prepend(
+		`<article id=${idea.id} class="idea-article">
+			<h2 class="idea-title" contenteditable=true >${idea.title}</h2>
+			<h2 class="overdue">OVERDUE</h2>
 			<div class="icon-buttons delete-button right"></div>
 			<p contenteditable="true" class="idea-paragraph">${idea.body}</p>
 	<div class="quality-completed">
@@ -131,7 +180,8 @@ function prependIdea(idea){
 function prependCompleted(idea){
 	$('.bookmark-list').prepend(
 		`<article id=${idea.id} class="idea-article completed">
-			<h2 class="idea-title completed" contenteditable=true >${idea.title}</h2> 
+			<h2 class="idea-title completed" contenteditable=true >${idea.title}</h2>
+			<h2 class="overdue">OVERDUE</h2>
 			<div class="icon-buttons delete-button right"></div>
 			<p contenteditable="true" class="idea-paragraph completed">${idea.body}</p>
 	<div class="quality-completed">
@@ -374,14 +424,14 @@ function showArticles(n){
 		for (var i = 0 ; i < artLength ; i++){
 			if (i < n){
 				$($('article')[i]).show();
-				console.log('first ten');
+				// console.log('first ten');
 			}else{
 				$($('article')[i]).hide();	
-				console.log('rest');	
+				// console.log('rest');	
 			}
 		}
 	showMoreDisable(10);
-	console.log('showten function');
+	// console.log('showten function');
 }
 
 function unhideShowMore(){

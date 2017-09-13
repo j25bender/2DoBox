@@ -106,6 +106,9 @@ span.filtering{
 	color: #CC3300;
 	display: inline-block;
 }
+.overdue-display-none{
+	display: none;
+}
 
 .icon{
 	width: 25px;
