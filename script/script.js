@@ -16,7 +16,7 @@ function cardRestore(){
 	keys.forEach(function(key){
 		if(JSON.parse(localStorage[key]).completed === true){
 		}else if (JSON.parse(localStorage[key]).overdue === false){
-			prependIdea(JSON.parse(localStorage[key]))
+			prependNormal(JSON.parse(localStorage[key]))
 		}else if (JSON.parse(localStorage[key]).overdue === true){
 			prependOverdue(JSON.parse(localStorage[key]));
 		}
@@ -57,16 +57,16 @@ function completedDisable(){
 
 $('.main-title , .idea-input').on('keyup', enabledBtn);
 
+
 function enabledBtn(e){
     if ($('.idea-input').val() === '' || $('.main-title').val() === '') {
       $('.enterButton').prop('disabled', true);
     } else {
       $('#submit-button').removeAttr('disabled');
     }
-    e.preventDefault();
 }
 
-function Idea(title, body, status, dueDate) {
+function Card(title, body,dueDate) {
 	this.title = title;
 	this.body = body; 
 	this.status = 'Normal'; 
@@ -76,7 +76,7 @@ function Idea(title, body, status, dueDate) {
 	this.overdue = false;
 }
 
-Idea.prototype.isOverDue = function(dueDate) {
+Card.prototype.isOverDue = function(dueDate) {
 	var nowDate = new Date();
 	var thisDueDate = new Date(dueDate);
 	if(nowDate.getTime() >= thisDueDate.getTime()){
@@ -84,36 +84,35 @@ Idea.prototype.isOverDue = function(dueDate) {
 	}
 };
 
-$('#submit-button').on('click', addIdea);
+$('#submit-button').on('click', addCard);
 
-function storeIdea (id, card) {
+function storeCard (id, card) {
 	localStorage.setItem(id, JSON.stringify(card));
 }
 
-function addIdea(e){
-	var title = $('.main-title').val();
-	var body = $('.idea-input').val();
-	var status = 'Normal';
+function addCard(e){
 	var dueDate = $('.month').val() +'-'+ $('.day').val() +'-'+ $('.year').val();
-	var anotherIdea = new Idea(title, body, status, dueDate);
-	anotherIdea.isOverDue(dueDate);
-	if (anotherIdea.overdue === false){
-		prependIdea(anotherIdea);
+	var anotherCard = new Card($('.main-title').val(), $('.idea-input').val(), dueDate);
+	anotherCard.isOverDue(dueDate);
+	if (anotherCard.overdue === false){
+		prependNormal(anotherCard);
 	}else{
-		prependOverdue(anotherIdea);
+		prependOverdue(anotherCard);
 	}
 	unhideShowMore();
-	storeIdea(anotherIdea.id, anotherIdea);
+	storeCard(anotherCard.id, anotherCard);
+	enabledBtn(e)
 	showArticles(10);
+	charCounter(e);
 	$('.main-title').focus();
 }
 
-function prependIdea(idea){
-	$('.bookmark-list').prepend(
+function prependNormal(idea){
+	$('.article-list').prepend(
 		`<article id=${idea.id} class="idea-article">
-	<h2 class="idea-title" contenteditable=true >${idea.title}</h2>
+	<div class="top-card"> <h2 class="idea-title" contenteditable=true >${idea.title}</h2>
 	<h2 class="overdue overdue-display-none">OVERDUE</h2>
-	<div class="icon-buttons delete-button right"></div>
+	<div class="icon-buttons delete-button right"></div> </div>
 	<p contenteditable="true" class="idea-paragraph">${idea.body}</p>
 	<div class="quality-completed">
 		<div class="quality-rank"> 
@@ -134,11 +133,11 @@ function prependIdea(idea){
 }
 
 function prependOverdue(idea){
-	$('.bookmark-list').prepend(
+	$('.article-list').prepend(
 		`<article id=${idea.id} class="idea-article">
-	<h2 class="idea-title" contenteditable=true >${idea.title}</h2>
+	<div class="top-card"> <h2 class="idea-title" contenteditable=true >${idea.title}</h2>
 	<h2 class="overdue">OVERDUE</h2>
-	<div class="icon-buttons delete-button right"></div>
+	<div class="icon-buttons delete-button right"></div> </div>
 	<p contenteditable="true" class="idea-paragraph">${idea.body}</p>
 	<div class="quality-completed">
 		<div class="quality-rank"> 
@@ -156,11 +155,11 @@ function prependOverdue(idea){
 }
 
 function prependCompleted(idea){
-	$('.bookmark-list').prepend(
+	$('.article-list').prepend(
 		`<article id=${idea.id} class="idea-article completed">
-	<h2 class="idea-title completed" contenteditable=true >${idea.title}</h2>
+	<div class="top-card"> <h2 class="idea-title completed" contenteditable=true >${idea.title}</h2>
 	<h2 class="overdue overdue-display-none">OVERDUE</h2>
-	<div class="icon-buttons delete-button right"></div>
+	<div class="icon-buttons delete-button right"></div> </div>
 	<p contenteditable="true" class="idea-paragraph completed">${idea.body}</p>
 	<div class="quality-completed">
 		<div class="quality-rank"> 
@@ -178,11 +177,11 @@ function prependCompleted(idea){
 }
 
 function prependCompletedOverdue(idea){
-	$('.bookmark-list').prepend(
+	$('.article-list').prepend(
 		`<article id=${idea.id} class="idea-article completed">
-	<h2 class="idea-title completed" contenteditable=true >${idea.title}</h2>
+	<div class="top-card"> <h2 class="idea-title completed" contenteditable=true >${idea.title}</h2>
 	<h2 class="overdue">OVERDUE</h2>
-	<div class="icon-buttons delete-button right"></div>
+	<div class="icon-buttons delete-button right"></div> </div>
 	<p contenteditable="true" class="idea-paragraph completed">${idea.body}</p>
 	<div class="quality-completed">
 		<div class="quality-rank"> 
@@ -199,12 +198,12 @@ function prependCompletedOverdue(idea){
 	$('input[type="date"]').val('');
 }
 
-$('.bookmark-list').on('click', '.delete-button', removeThis);
+$('.article-list').on('click', '.delete-button', removeThis);
 
 function removeThis(e){
-	$(e.target).parent().remove();
+	$(e.target).parent().parent().remove();
 	unhideShowMore();
-	localStorage.removeItem($(e.target).parent().attr('id'));
+	localStorage.removeItem($(e.target).parent().parent().attr('id'));
 	showArticles(10);
 }
 
@@ -213,12 +212,12 @@ $('.main-title , .idea-input').on('keyup', returnBtnCheckValue);
 function returnBtnCheckValue(e){
 	if (e.keyCode === 13 && $('.main-title').val() !== '' && $('.idea-input').val() !== ''){
 		e.preventDefault();
-		addIdea();
+		addCard();
+		$('.main-title').focus();
 	}
 	e.preventDefault();
 	unhideShowMore();
 	charCounter(e);
-	// formatNowDate();
 }
 
 function dayDue(){
@@ -244,7 +243,7 @@ function charCounter(e){
 	}
 }
 
-$('.bookmark-list').on('click', '.upvote-button', upVoteTodo);
+$('.article-list').on('click', '.upvote-button', upVoteTodo);
 
 function upVoteTodo(){
 	var currentId = ($(this).closest('.idea-article').attr('id'));
@@ -259,7 +258,7 @@ function upVoteTodo(){
 	resetCard(newQuality,currentId);
 }
 
-$('.bookmark-list').on('click', '.downvote-button', downVoteTodo);
+$('.article-list').on('click', '.downvote-button', downVoteTodo);
 
 function downVoteTodo(){
 	var currentId = ($(this).closest('.idea-article').attr('id'));
@@ -298,7 +297,7 @@ function resetCard(newQuality,id){
 	localStorage.setItem(id, JSON.stringify(uniqueCard));
 }
 
-$('.bookmark-list').on('keyup', '.idea-title', editTitle);
+$('.article-list').on('keyup', '.idea-title', editTitle);
 
 function editTitle(event){
 	var id = ($(this).closest('.idea-article').attr('id'));
@@ -311,7 +310,7 @@ function editTitle(event){
 	localStorage.setItem(id, JSON.stringify(uniqueCard));
 }
 
-$('.bookmark-list').on('keyup', '.idea-paragraph', editBody);
+$('.article-list').on('keyup', '.idea-paragraph', editBody);
 
 function editBody(event){
 	var id = ($(this).closest('.idea-article').attr('id'));
@@ -324,7 +323,7 @@ function editBody(event){
 	localStorage.setItem(id, JSON.stringify(uniqueCard));
 }
 
-$('.bookmark-list').on('keyup', '.due-date', editDueDate);
+$('.article-list').on('keyup', '.due-date', editDueDate);
 
 function editDueDate(event){
 	var id = ($(this).closest('.idea-article').attr('id'));
@@ -337,7 +336,7 @@ function editDueDate(event){
 	localStorage.setItem(id, JSON.stringify(uniqueCard));
 }
 
-$('.bookmark-list').on('click', '.isCompleted', markCompleted);
+$('.article-list').on('click', '.isCompleted', markCompleted);
 
 function markCompleted(event){
 	($(this).closest('.idea-article')).toggleClass('completed');

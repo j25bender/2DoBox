@@ -17,6 +17,10 @@ h1{
 	padding-top: 10px;
 }
 
+.accent-color{
+	color: #19a3d1;
+}
+
 h1, h2, h3{
 	font-family: 'Roboto Slab', serif;
 }
@@ -27,17 +31,13 @@ header{
 	text-align: center;
 }
 
-.accent-color{
-	color: #19a3d1;
-}
-
 .input{
-	width: 85%;
-	margin: 10px 10px 5px 10px;
-	height: 33px;
-	padding: 10px 5px;
 	border: 2px solid #19a3d1;
+	height: 33px;
+	margin: 10px 10px 5px 10px;
+	padding: 10px 5px;
 	font-size: 13pt;
+	width: 85%;
 }
 
 .idea-input{
@@ -94,6 +94,11 @@ span#body-char-count{
 	font-size: 35px;
 }
 
+div.top-card{
+	display: flex;
+	justify-content: space-between;
+}
+
 select{
    -webkit-appearance: none;
    -moz-appearance: none;
@@ -135,10 +140,27 @@ span.filtering{
 	height: 25px;
 }
 
-.right{
-	margin-left: 96%;
+
+
+#search-input{
+	margin-top: 15px;
 }
 
+button.restore-completed{
+	background-color: #F97F66 ;
+	display: block;
+	margin: 0px auto;
+	border: 1px solid #F97F66;
+	font-size: 15px;
+}
+
+button.restore-completed:hover{
+	background-color: #F95939
+}
+
+button.restore-completed:disabled{
+	background-color: #F9F1EF;
+}
 h2{
 	color: #6D6E71;
 	font-size: 18px;
@@ -160,26 +182,6 @@ h2.completed{
 .idea-article.completed{
 	background-color: #cecece;
 	opacity: .5;
-}
-
-#search-input{
-	margin-top: 15px;
-}
-
-button.restore-completed{
-	background-color: #F97F66 ;
-	display: block;
-	margin: 0px auto;
-	border: 1px solid #F97F66;
-	font-size: 15px;
-}
-
-button.restore-completed:hover{
-	background-color: #F95939
-}
-
-button.restore-completed:disabled{
-	background-color: #F9F1EF;
 }
 
 .date{
@@ -252,6 +254,7 @@ div.date-select{
 	margin-top: -30px;
 }
 
+
 .delete-button{
 	
 	background:url('../images/delete.svg');
@@ -262,8 +265,7 @@ div.date-select{
 }
 
 .delete-button{
-	margin-top: -20px;
-	margin-right: 20px;
+	margin-right: 0px;
 }
 
 .upvote-button{
@@ -370,31 +372,6 @@ hr{
 }
 
 @media only screen and (max-width: 420px){
-	/*ul{
-		flex-wrap: wrap;
-	}
-	li{
-		margin-top: 5px;
-	}
-	button.isCompleted{
-		font-size: 8px;
-	}
-
-	p.importance{
-		font-size: 10px;
-	}
-	
-	li.spacer2{
-		display: inline-block;
-		width: 40px;
-		border: none;
-	}
-
-	li.spacer3{
-		display: inline-block;
-		width: 175px;
-		border: none;
-	}*/
 
 }
 
@@ -430,6 +407,10 @@ hr{
 		height: 20px;
 		width: 20px;
 		margin-right: 7px;
+	}
+
+	.delete-button{
+		margin-right: 0px;
 	}
 }
 
