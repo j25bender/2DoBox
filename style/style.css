@@ -105,6 +105,7 @@ span#body-char-count{
 .date{
 	margin-top: -34px;
 	margin-bottom: 8px;
+}
 
 div.top-card{
 	display: flex;
@@ -322,6 +323,7 @@ li{
 	border: 1px solid #e08466;
 	color: #e08466;
 	opacity: 0.75;
+}
 
 li.spacer1{
 	display: none;
@@ -467,10 +469,6 @@ hr{
 		font-size: 17px;
 		height: 28px;
 		width: 70%;
-	}
-
-	.filter{
-		
 	}
 
 	.idea-article{
