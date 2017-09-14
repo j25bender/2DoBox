@@ -275,7 +275,6 @@ li{
 
 #one{
 	background-color: #CC3300;
-	border: 1px solid #CC3300;
 	color: #CC3300;
 	opacity: 0.75;
 }
@@ -286,7 +285,6 @@ li{
 
 #two{
 	background-color: #d14719;
-	border: 1px solid #d14719;
 	color: #d14719;
 	opacity: 0.75;
 }
@@ -297,7 +295,6 @@ li{
 
 #three{
 	background-color: #d65b32;
-	border: 1px solid #d65b32;
 	color: #d65b32;
 	opacity: 0.75;
 }
@@ -308,7 +305,6 @@ li{
 
 #four{
 	background-color: #db704c;
-	border: 1px solid #db704c;
 	color: #db704c;
 	opacity: 0.75;
 }
@@ -320,7 +316,6 @@ li{
 
 #five{
 	background-color: #e08466;
-	border: 1px solid #e08466;
 	color: #e08466;
 	opacity: 0.75;
 }
@@ -346,11 +341,12 @@ li.five{
 }
 
 li.active-filter{
-	background-color: #F9E5E0;
+	border: 2px solid black;
 }
 
 .filter-accent{
-	color: pink;
+	color: white;
+	font-size: 12px;
 }
 
 .icon-buttons{
