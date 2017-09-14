@@ -63,7 +63,7 @@ textarea::placeholder{
 }
 
 .button{
-	background: #F97F66;
+	background: grey;
 	color: #FFFFFF;	
 	border: none;
 	width: 85%;
@@ -89,6 +89,19 @@ span#body-char-count{
 	font-size: 35px;
 }
 
+#due{
+	color: #808080;
+	display: inline-block;
+	font-weight: 800;
+	margin-right: 5px;
+	vertical-align: bottom;
+}
+
+.date{
+	margin-top: -34px;
+	margin-bottom: 8px;
+}
+
 select{
    -webkit-appearance: none;
    -moz-appearance: none;
@@ -100,6 +113,10 @@ select{
 
 .enter-button{
 	display: block;
+}
+
+.enter-button:enabled{
+	background-color: grey;
 }
 
 
@@ -146,8 +163,9 @@ h2.completed{
 .idea-article{
 	background-color: #FFF;
 	border: 1px solid #0099cc;
+	border-radius: 10px;
 	width: 85%;
-	margin: 20px auto;
+	margin: 0 auto 10px;
 	padding: 5px;
 	text-align: left;
 }
@@ -162,19 +180,22 @@ h2.completed{
 }
 
 button.restore-completed{
-	background-color: #F97F66 ;
+	background-color: #19A3D1;
 	display: block;
-	margin: 0px auto;
-	border: 1px solid #F97F66;
+	margin: 12px auto 0;
+	border: 1px solid #19A3D1;
+	border-bottom: none;
+	border-radius: 5px 5px 0 0;
 	font-size: 15px;
+	color: white;
 }
 
 button.restore-completed:hover{
-	background-color: #F95939
+	background-color: grey;
 }
 
 button.restore-completed:disabled{
-	background-color: #F9F1EF;
+	background-color: grey;
 }
 
 .date{
@@ -199,19 +220,72 @@ ul{
 	font-size: 10px;
 }
 
+.filter{
+	font-size: 14px;
+	font-weight: 800;
+}
+
 li{
-	display: inline;
-	padding: 5px 10px;
 	border: 1px solid #F98B76;
+	display: inline;
 	font-size: 10px;
+	padding: 5px 10px;
+	width: 80px;
 }
 
-li.five{
-	margin-right: 0px;
+#one{
+	background-color: #CC3300;
+	border: 1px solid #CC3300;
+	color: #CC3300;
+	opacity: 0.75;
 }
 
-li:hover{
-	background-color: #F9836B;
+#one:hover{
+	opacity: 1;
+}
+
+#two{
+	background-color: #d14719;
+	border: 1px solid #d14719;
+	color: #d14719;
+	opacity: 0.75;
+}
+
+#two:hover{
+	opacity: 1;
+}
+
+#three{
+	background-color: #d65b32;
+	border: 1px solid #d65b32;
+	color: #d65b32;
+	opacity: 0.75;
+}
+
+#three:hover{
+	opacity: 1;
+}
+
+#four{
+	background-color: #db704c;
+	border: 1px solid #db704c;
+	color: #db704c;
+	opacity: 0.75;
+}
+
+#four:hover{
+	opacity: 1;
+}
+
+#five{
+	background-color: #e08466;
+	border: 1px solid #e08466;
+	color: #e08466;
+	opacity: 0.75;
+}
+
+#five:hover{
+	opacity: 1;
 }
 
 li.active-filter{
@@ -219,7 +293,7 @@ li.active-filter{
 }
 
 .filter-accent{
-	color: #F9BBAE;
+	color: pink;
 }
 
 .icon-buttons{

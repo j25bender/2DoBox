@@ -188,7 +188,6 @@ function returnBtnCheckValue(e){
 	}
 	unhideShowMore();
 	charCounter(e);
-	// formatNowDate();
 }
 
 function dayDue(){
