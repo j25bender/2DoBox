@@ -63,7 +63,7 @@ textarea::placeholder{
 }
 
 .button{
-	background: grey;
+	background: #0099cc;
 	color: #FFFFFF;	
 	border: none;
 	width: 85%;
@@ -116,7 +116,7 @@ select{
 }
 
 .enter-button:enabled{
-	background-color: grey;
+	background-color: #0099cc;
 }
 
 
@@ -196,6 +196,17 @@ button.restore-completed:hover{
 
 button.restore-completed:disabled{
 	background-color: grey;
+}
+
+.fadein, .fadeout {
+    opacity: 0;
+    -moz-transition: opacity 0.4s ease-in-out;
+    -o-transition: opacity 0.4s ease-in-out;
+    -webkit-transition: opacity 0.4s ease-in-out;
+    transition: opacity 0.4s ease-in-out;
+}
+.fadein {
+    opacity: 1;
 }
 
 .date{
