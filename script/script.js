@@ -15,20 +15,26 @@ function cardRestore(){
 	var keys = Object.keys(localStorage);
 	keys.forEach(function(key){
 		if(JSON.parse(localStorage[key]).completed === true){
-		}else{
-		prependIdea(JSON.parse(localStorage[key]))}
+		}else if (JSON.parse(localStorage[key]).overdue === false){
+			prependIdea(JSON.parse(localStorage[key]))
+		}else if (JSON.parse(localStorage[key]).overdue === true){
+			prependOverdue(JSON.parse(localStorage[key]));
+		}
 	})
 }
 
 $('.restore-completed').on('click',restoreCompleted);
 
+
 function restoreCompleted(){
 	var keys = Object.keys(localStorage);
 	keys.forEach(function(key){
-		if(JSON.parse(localStorage[key]).completed === true && $('article#'+key).length === 0){
+		if(JSON.parse(localStorage[key]).completed === true && $('article#'+key).length === 0 && JSON.parse(localStorage[key]).overdue === false){
 			prependCompleted(JSON.parse(localStorage[key]));
+		}else if(JSON.parse(localStorage[key]).completed === true && $('article#'+key).length === 0 && JSON.parse(localStorage[key]).overdue === true){
+			prependCompletedOverdue(JSON.parse(localStorage[key]));
 		}
-	})
+	});
 	$('.restore-completed').prop('disabled',true);
 }
 
@@ -51,12 +57,13 @@ function completedDisable(){
 
 $('.main-title , .idea-input').on('keyup', enabledBtn);
 
-function enabledBtn(){
+function enabledBtn(e){
     if ($('.idea-input').val() === '' || $('.main-title').val() === '') {
       $('.enterButton').prop('disabled', true);
     } else {
       $('#submit-button').removeAttr('disabled');
     }
+    e.preventDefault();
 }
 
 function Idea(title, body, status, dueDate) {
@@ -104,21 +111,23 @@ function addIdea(e){
 function prependIdea(idea){
 	$('.bookmark-list').prepend(
 		`<article id=${idea.id} class="idea-article">
-			<h2 class="idea-title" contenteditable=true >${idea.title}</h2>
-			<h2 class="overdue overdue-display-none">OVERDUE</h2>
-			<div class="icon-buttons delete-button right"></div>
-			<p contenteditable="true" class="idea-paragraph">${idea.body}</p>
+	<h2 class="idea-title" contenteditable=true >${idea.title}</h2>
+	<h2 class="overdue overdue-display-none">OVERDUE</h2>
+	<div class="icon-buttons delete-button right"></div>
+	<p contenteditable="true" class="idea-paragraph">${idea.body}</p>
 	<div class="quality-completed">
 		<div class="quality-rank"> 
 			<div class="icon-buttons upvote-button"></div>
 			<div class="icon-buttons downvote-button"></div>
-			<p class="importance"> Importance: <span class="quality-content">${idea.status}</span> </p><br />
-			<div><p class="task-due-date">Due Date:<span contenteditable="true" class="due-content">${idea.dueDate}</span></p></div>
-		</div> 
+			<p class="importance"><span class="quality-content">${idea.status}</span> </p><br /> 
+		</div>
+			<div>
+				<p class="task-due-date">Due Date:<span contenteditable="true" class="due-content">${idea.dueDate}</span></p>
+			</div>
 		<button class="isCompleted"> Completed </button>
 	</div>
-		<hr/> 
-</article>`)
+	<hr/> 
+	</article>`)
 	$('.main-title').val("");
 	$('.idea-input').val("");
 	$('input[type="date"]').val('');
@@ -127,21 +136,20 @@ function prependIdea(idea){
 function prependOverdue(idea){
 	$('.bookmark-list').prepend(
 		`<article id=${idea.id} class="idea-article">
-			<h2 class="idea-title" contenteditable=true >${idea.title}</h2>
-			<h2 class="overdue">OVERDUE</h2>
-			<div class="icon-buttons delete-button right"></div>
-			<p contenteditable="true" class="idea-paragraph">${idea.body}</p>
+	<h2 class="idea-title" contenteditable=true >${idea.title}</h2>
+	<h2 class="overdue">OVERDUE</h2>
+	<div class="icon-buttons delete-button right"></div>
+	<p contenteditable="true" class="idea-paragraph">${idea.body}</p>
 	<div class="quality-completed">
 		<div class="quality-rank"> 
 			<div class="icon-buttons upvote-button"></div>
-			<div class="icon-buttons downvote-button"></div>
-			<p class="importance"> Importance: <span class="quality-content">${idea.status}</span> </p><br />
+				<div class="icon-buttons downvote-button"></div>
+				<p class="importance"><span class="quality-content">${idea.status}</span> </p><br /> </div>
 			<div><p class="task-due-date">Due Date:<span contenteditable="true" class="due-content">${idea.dueDate}</span></p></div>
-		</div> 
 		<button class="isCompleted"> Completed </button>
 	</div>
-		<hr/> 
-</article>`)
+	<hr/> 
+	</article>`)
 	$('.main-title').val("");
 	$('.idea-input').val("");
 	$('input[type="date"]').val('');
@@ -150,21 +158,42 @@ function prependOverdue(idea){
 function prependCompleted(idea){
 	$('.bookmark-list').prepend(
 		`<article id=${idea.id} class="idea-article completed">
-			<h2 class="idea-title completed" contenteditable=true >${idea.title}</h2>
-			<h2 class="overdue">OVERDUE</h2>
-			<div class="icon-buttons delete-button right"></div>
-			<p contenteditable="true" class="idea-paragraph completed">${idea.body}</p>
+	<h2 class="idea-title completed" contenteditable=true >${idea.title}</h2>
+	<h2 class="overdue overdue-display-none">OVERDUE</h2>
+	<div class="icon-buttons delete-button right"></div>
+	<p contenteditable="true" class="idea-paragraph completed">${idea.body}</p>
 	<div class="quality-completed">
 		<div class="quality-rank"> 
 			<div class="icon-buttons upvote-button"></div>
-			<div class="icon-buttons downvote-button"></div>
-			<p class="importance completed"> Importance: <span class="quality-content">${idea.status}</span></p>
+				<div class="icon-buttons downvote-button"></div>
+				<p class="importance completed"><span class="quality-content">${idea.status}</span> </p><br /> </div>
 			<div><p class="task-due-date">Due Date:<span contenteditable="true" class="due-content">${idea.dueDate}</span></p></div>
-		</div> 
 		<button class="isCompleted"> Completed </button>
 	</div>
-		<hr/> 
-</article>`)
+	<hr/> 
+	</article>`)
+	$('.main-title').val("");
+	$('.idea-input').val("");
+	$('input[type="date"]').val('');
+}
+
+function prependCompletedOverdue(idea){
+	$('.bookmark-list').prepend(
+		`<article id=${idea.id} class="idea-article completed">
+	<h2 class="idea-title completed" contenteditable=true >${idea.title}</h2>
+	<h2 class="overdue">OVERDUE</h2>
+	<div class="icon-buttons delete-button right"></div>
+	<p contenteditable="true" class="idea-paragraph completed">${idea.body}</p>
+	<div class="quality-completed">
+		<div class="quality-rank"> 
+			<div class="icon-buttons upvote-button"></div>
+				<div class="icon-buttons downvote-button"></div>
+				<p class="importance completed"><span class="quality-content">${idea.status}</span> </p><br /> </div>
+			<div><p class="task-due-date">Due Date:<span contenteditable="true" class="due-content">${idea.dueDate}</span></p></div>
+		<button class="isCompleted"> Completed </button>
+	</div>
+	<hr/> 
+	</article>`)
 	$('.main-title').val("");
 	$('.idea-input').val("");
 	$('input[type="date"]').val('');
@@ -186,6 +215,7 @@ function returnBtnCheckValue(e){
 		e.preventDefault();
 		addIdea();
 	}
+	e.preventDefault();
 	unhideShowMore();
 	charCounter(e);
 	// formatNowDate();

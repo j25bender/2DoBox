@@ -72,6 +72,11 @@ textarea::placeholder{
 	font-size: 18px;
 }
 
+button.isCompleted{
+	border: black;
+	background: #F97F66;
+}
+
 .button:disabled{
 	background-color: grey;
 }
@@ -183,6 +188,7 @@ button.restore-completed:disabled{
 
 .task-due-date{
 	justify-content: space-between;
+	font-size: 12px;
 }
 
 .due-content{
@@ -206,6 +212,18 @@ li{
 	font-size: 10px;
 }
 
+li.spacer1{
+	display: none;
+}
+
+li.spacer2{
+	display: none;
+}
+
+li.spacer3{
+	display: none;
+}
+
 li.five{
 	margin-right: 0px;
 }
@@ -226,6 +244,12 @@ li.active-filter{
 	height: 25px;
 	width: 25px;
 	margin-right: 15px;
+	background-position: cover;
+	background-repeat: no-repeat;
+}
+
+div.date-select{
+	margin-top: -30px;
 }
 
 .delete-button{
@@ -260,6 +284,7 @@ li.active-filter{
 .quality-completed{
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
 }
 
 .quality-rank{
@@ -343,3 +368,69 @@ hr{
 		margin-right: auto;
 	}
 }
+
+@media only screen and (max-width: 420px){
+	/*ul{
+		flex-wrap: wrap;
+	}
+	li{
+		margin-top: 5px;
+	}
+	button.isCompleted{
+		font-size: 8px;
+	}
+
+	p.importance{
+		font-size: 10px;
+	}
+	
+	li.spacer2{
+		display: inline-block;
+		width: 40px;
+		border: none;
+	}
+
+	li.spacer3{
+		display: inline-block;
+		width: 175px;
+		border: none;
+	}*/
+
+}
+
+@media only screen and (max-width: 380px){
+	
+	button.isCompleted{
+		font-size: 10px;
+	}
+
+	p.importance{
+		font-size: 10px;
+	}
+
+}
+@media only screen and (max-width: 325px){
+	ul{
+		flex-wrap: wrap;
+	}
+	li{
+		margin-top: 5px;
+	}
+
+	li.spacer3{
+		display: inline-block;
+		border: none;
+		width: 120px;
+	}
+	p.task-due-date{
+		font-size: 10px;
+	}
+
+	.icon-buttons{
+		height: 20px;
+		width: 20px;
+		margin-right: 7px;
+	}
+}
+
+
