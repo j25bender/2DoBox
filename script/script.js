@@ -460,8 +460,9 @@ function showMoreDisable(n){
 function fade(){
     if ($('article').length > 0 && $('#dropInFadeOut').hasClass("fadeout")){
         $('#dropInFadeOut').removeClass("fadeout").addClass("fadein");
-    }
-    else{
+    }else if($('article').length > 0 && $('#dropInFadeOut').hasClass("fadein")){
+
+    }else{
         $('#dropInFadeOut').removeClass("fadein").addClass("fadeout");
     }
 }
