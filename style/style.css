@@ -17,6 +17,10 @@ h1{
 	padding-top: 10px;
 }
 
+.accent-color{
+	color: #19a3d1;
+}
+
 h1, h2, h3{
 	font-family: 'Roboto Slab', serif;
 }
@@ -27,17 +31,13 @@ header{
 	text-align: center;
 }
 
-.accent-color{
-	color: #19a3d1;
-}
-
 .input{
-	width: 85%;
-	margin: 10px 10px 5px 10px;
-	height: 33px;
-	padding: 10px 5px;
 	border: 2px solid #19a3d1;
+	height: 33px;
+	margin: 10px 10px 5px 10px;
+	padding: 10px 5px;
 	font-size: 13pt;
+	width: 85%;
 }
 
 .idea-input{
@@ -141,6 +141,26 @@ span.filtering{
 }
 
 
+
+#search-input{
+	margin-top: 15px;
+}
+
+button.restore-completed{
+	background-color: #F97F66 ;
+	display: block;
+	margin: 0px auto;
+	border: 1px solid #F97F66;
+	font-size: 15px;
+}
+
+button.restore-completed:hover{
+	background-color: #F95939
+}
+
+button.restore-completed:disabled{
+	background-color: #F9F1EF;
+}
 h2{
 	color: #6D6E71;
 	font-size: 18px;
@@ -162,26 +182,6 @@ h2.completed{
 .idea-article.completed{
 	background-color: #cecece;
 	opacity: .5;
-}
-
-#search-input{
-	margin-top: 15px;
-}
-
-button.restore-completed{
-	background-color: #F97F66 ;
-	display: block;
-	margin: 0px auto;
-	border: 1px solid #F97F66;
-	font-size: 15px;
-}
-
-button.restore-completed:hover{
-	background-color: #F95939
-}
-
-button.restore-completed:disabled{
-	background-color: #F9F1EF;
 }
 
 .date{
@@ -265,7 +265,7 @@ div.date-select{
 }
 
 .delete-button{
-	margin-right: 1vw;
+	margin-right: 0px;
 }
 
 .upvote-button{
@@ -407,6 +407,10 @@ hr{
 		height: 20px;
 		width: 20px;
 		margin-right: 7px;
+	}
+
+	.delete-button{
+		margin-right: 0px;
 	}
 }
 
