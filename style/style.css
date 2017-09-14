@@ -94,6 +94,11 @@ span#body-char-count{
 	font-size: 35px;
 }
 
+div.top-card{
+	display: flex;
+	justify-content: space-between;
+}
+
 select{
    -webkit-appearance: none;
    -moz-appearance: none;
@@ -135,9 +140,6 @@ span.filtering{
 	height: 25px;
 }
 
-.right{
-	margin-left: 96%;
-}
 
 h2{
 	color: #6D6E71;
@@ -252,6 +254,7 @@ div.date-select{
 	margin-top: -30px;
 }
 
+
 .delete-button{
 	
 	background:url('../images/delete.svg');
@@ -262,8 +265,7 @@ div.date-select{
 }
 
 .delete-button{
-	margin-top: -20px;
-	margin-right: 20px;
+	margin-right: 1vw;
 }
 
 .upvote-button{
@@ -370,31 +372,6 @@ hr{
 }
 
 @media only screen and (max-width: 420px){
-	/*ul{
-		flex-wrap: wrap;
-	}
-	li{
-		margin-top: 5px;
-	}
-	button.isCompleted{
-		font-size: 8px;
-	}
-
-	p.importance{
-		font-size: 10px;
-	}
-	
-	li.spacer2{
-		display: inline-block;
-		width: 40px;
-		border: none;
-	}
-
-	li.spacer3{
-		display: inline-block;
-		width: 175px;
-		border: none;
-	}*/
 
 }
 

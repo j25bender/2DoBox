@@ -111,9 +111,9 @@ function addIdea(e){
 function prependIdea(idea){
 	$('.bookmark-list').prepend(
 		`<article id=${idea.id} class="idea-article">
-	<h2 class="idea-title" contenteditable=true >${idea.title}</h2>
+	<div class="top-card"> <h2 class="idea-title" contenteditable=true >${idea.title}</h2>
 	<h2 class="overdue overdue-display-none">OVERDUE</h2>
-	<div class="icon-buttons delete-button right"></div>
+	<div class="icon-buttons delete-button right"></div> </div>
 	<p contenteditable="true" class="idea-paragraph">${idea.body}</p>
 	<div class="quality-completed">
 		<div class="quality-rank"> 
@@ -136,9 +136,9 @@ function prependIdea(idea){
 function prependOverdue(idea){
 	$('.bookmark-list').prepend(
 		`<article id=${idea.id} class="idea-article">
-	<h2 class="idea-title" contenteditable=true >${idea.title}</h2>
+	<div class="top-card"> <h2 class="idea-title" contenteditable=true >${idea.title}</h2>
 	<h2 class="overdue">OVERDUE</h2>
-	<div class="icon-buttons delete-button right"></div>
+	<div class="icon-buttons delete-button right"></div> </div>
 	<p contenteditable="true" class="idea-paragraph">${idea.body}</p>
 	<div class="quality-completed">
 		<div class="quality-rank"> 
@@ -158,9 +158,9 @@ function prependOverdue(idea){
 function prependCompleted(idea){
 	$('.bookmark-list').prepend(
 		`<article id=${idea.id} class="idea-article completed">
-	<h2 class="idea-title completed" contenteditable=true >${idea.title}</h2>
+	<div class="top-card"> <h2 class="idea-title completed" contenteditable=true >${idea.title}</h2>
 	<h2 class="overdue overdue-display-none">OVERDUE</h2>
-	<div class="icon-buttons delete-button right"></div>
+	<div class="icon-buttons delete-button right"></div> </div>
 	<p contenteditable="true" class="idea-paragraph completed">${idea.body}</p>
 	<div class="quality-completed">
 		<div class="quality-rank"> 
@@ -180,9 +180,9 @@ function prependCompleted(idea){
 function prependCompletedOverdue(idea){
 	$('.bookmark-list').prepend(
 		`<article id=${idea.id} class="idea-article completed">
-	<h2 class="idea-title completed" contenteditable=true >${idea.title}</h2>
+	<div class="top-card"> <h2 class="idea-title completed" contenteditable=true >${idea.title}</h2>
 	<h2 class="overdue">OVERDUE</h2>
-	<div class="icon-buttons delete-button right"></div>
+	<div class="icon-buttons delete-button right"></div> </div>
 	<p contenteditable="true" class="idea-paragraph completed">${idea.body}</p>
 	<div class="quality-completed">
 		<div class="quality-rank"> 
